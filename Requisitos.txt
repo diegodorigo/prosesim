@@ -1,0 +1,34 @@
+Cadastro do candidato
+NOME
+DATA DE NASCIMENTO
+CPF
+IDENTIDADE
+ENDEREÇO
+TELEFONE CELULAR
+TELEFONE FIXO
+POSSUI DEFICIÊNCIA (S/N)
+TIPO DEFICIÊNCIA
+
+Formação
+FORMAÇÃO ACADÊMICA
+CURSOS OPÇÃO 1
+CURSOS OPÇÃO 2
+
+ÁREA PLEITEADA
+
+Tempo de Serviço
+DESCRIÇÃO
+DATA INICIAL
+DATA FINAL
+TOTAL DIAS
+
+
+Login pelo CPF
+Validar CPF
+Verificar CPF já cadastrado
+Duas opoções de curso por cadidato
+Duas inscrições por CPF
+Gerar ficha de inscrição em PDF (Incluir QR code na ficha de inscrição)
+Até 10 cadastros de tempo de serviço
+Limitar cadastros de tempo ao atingir 1000 dias
+Não permitir tempos de serviços concomitantes
