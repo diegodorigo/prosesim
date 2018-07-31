@@ -2,23 +2,119 @@
 <html>
 	<head>
 		<title>PROSESIM | Cadastro</title>
+		<script src="js/jquery-2.2.1.js"></script>
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 		<link href="css/style.css" rel="stylesheet">
+		<script src="js/input_mask.js"></script>
 	</head>
-	<body>
+	<body class="body">			
 		<div class="menu">
-				<div class="container-fluid">
-					<div class="navbar-header">	
-                        <a>Cadastro</a>					
-					</div>
-					<div>
-						<ul class="nav navbar-nav navbar-right">
-							<li><a href="/" ><span class="glyphicon glyphicon-user"></span> Sair</a></li>
-						</ul>
-					</div>
+			<div class="container-fluid">
+				<div>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/" ><span class="glyphicon glyphicon-user"></span> Sair</a></li>
+					</ul>
 				</div>
 			</div>
-	</body>
+		</div>
+		<br/>
+		<br/>
+		<br/>
+		<br/>	
+		<br/>
+		
+		<div class="container">
+			<div class="row">				
+					<% if (validacao.length > 0) { %>
+						<div class="col-md-12">
+							<div class="alert alert-danger">
+								<strong>Atenção!</strong>
+								<ul>
+									<% for(var i = 0; i < validacao.length; i++) { %>									
+										<li><%= validacao[i].msg %></li>
+									<% } %>
+								</ul>
+							</div>
+						</div>
+					<% } %>
+				</div>
+		</div>
+
+		<div class="container">
+			<form class="form" action="/cadastro" method="post">
+				<h4 class="text-left text-info">Identificação</h4>			
+				<div class="col-md-12">
+					<label class="text-info">Nome:</label>
+					<input type="text" name="nome" id="nome" class="form-control" maxlength="100" placeholder="nome completo do candidato">
+				</div>
+				<div class="col-md-12">
+					<label class="text-info">Email:</label>
+					<input type="email" name="email" id="email" class="form-control" maxlength="120">
+				</div>						
+				<div class="col-md-4">
+					<label class="text-info">Nascimento:</label>
+					<input type="date" name="nascimento" id="nascimento" class="form-control">
+				</div>
+				<div class="col-md-4">
+					<label class="text-info">CPF:</label>
+					<input type="text" name="cpf" id="cpf" class="form-control" onkeydown="javascript: fMasc(this, mCPF);" maxlength="14" placeholder="apenas números">
+				</div>
+				<div class="col-md-4">
+					<label class="text-info">Identidade:</label>
+					<input type="text" name="identidade" id="identidade" class="form-control" maxlength="24">
+				</div>	
+				<div class="col-md-10">
+					<label class="text-info">Endereço:</label>
+					<input type="text" name="logradouro" id="logradouro" class="form-control" maxlength="200">
+				</div>
+				<div class="col-md-2">
+					<label class="text-info">Número:</label>
+					<input type="text" name="numero" id="numero" class="form-control" maxlength="10">
+				</div>
+				<div class="col-md-6">
+					<label class="text-info">Bairro:</label>
+					<input type="text" name="bairro" id="bairro" class="form-control" maxlength="50" style="text-transform: capitalize">
+				</div>
+				<div class="col-md-4">
+					<label class="text-info">Município:</label>
+					<input type="text" name="municipio" id="municipio" class="form-control" maxlength="50" style="text-transform: capitalize">
+				</div>
+				<div class="col-md-2">
+					<label class="text-info">Estado:</label>
+					<input type="text" name="estado" id="estado" class="form-control" maxlength="2" style="text-transform:uppercase">
+				</div>
+				<div class="col-md-6">
+					<label class="text-info">Telefone 1:</label>
+					<input type="text" name="telefone1" id="telefone1" class="form-control" onkeydown="javascript: fMasc(this, mTel);" maxlength="14">
+				</div>
+				<div class="col-md-6">
+					<label class="text-info">Telefone 2:</label>
+					<input type="text" name="telefone2" id="telefone2" class="form-control" onkeydown="javascript: fMasc(this, mTel);" maxlength="14">
+				</div>
+				<div class="col-md-4">
+					<label class="text-info">Possui deficiência?</label>
+					<select name="deficiente" id="deficiente" class="form-control">
+						<option>NÃO</option>
+						<option>SIM</option>
+					</select>
+				</div>
+				<div class="col-md-8">
+					<label class="text-info">Tipo da deficiência:</label>
+					<input type="text" name="deficiencia" id="deficiencia" class="form-control" maxlength="100">
+				</div>
+				<div class="col-md-4">
+					<label class="text-info">Senha:</label>
+					<input type="password" name="senha" id="senha" class="form-control" maxlength="20">
+				</div>	
+				<input type="hidden" name="protocolo" id="protocolo" class="form-control" value="ajustarprotocolo">
+				
+				<div class="col-md-12">
+					<br/>
+					<input type="submit" class="btn btn-info btn-md" value="Salvar">
+				</div>
+			</form>				
+		</div>
+		</body>
 </html>
