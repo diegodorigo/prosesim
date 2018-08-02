@@ -13,21 +13,24 @@
 			<h3 class="text-center text-white pt-5">PROCESSO SELETIVO SIMPLIFICADO</h3>
 			<div class="container">
 				<div id="login-row" class="row justify-content-center align-items-center">
-					<div id="login-column" class="col-md-6">
-						<div id="login-box" class="col-md-12">
-							<form id="login-form" class="form" action="/candidato" method="post">
+					<div id="login-column" class="col-sm-6">
+						<div id="login-box" class="col-sm-12">
+							<form id="login-form" class="form" action="/" method="post">
 								<h3 class="text-center text-info">Acesso ao sistema</h3>
 								<div class="form-group">
 									<label for="username" class="text-info">CPF:</label><br>
-									<input type="text" name="cpf" id="cpf" class="form-control" onkeydown="javascript: fMasc(this, mCPF);" maxlength="14">
+									<input type="text" name="cpf" id="cpf" value="<%=dadosForm.cpf%>" class="form-control" onkeydown="javascript: fMasc(this, mCPF);" maxlength="14">
 								</div>
 								<div class="form-group">
 									<label for="password" class="text-info">Senha:</label><br>
-									<input type="password" name="senha" id="senha" class="form-control">
+									<input type="password" name="senha" id="senha" value="<%=dadosForm.senha%>" class="form-control">
 								</div>
 								<div class="form-group">
-									<label for="remember-me" class="text-info"><span>Lembre-me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+									<label for="remember" class="text-info"><span>Esqueci minha senha</span> </label>
+									<span><input type="checkbox" id="remember" name="remember" ></span>
+									<br>
 									<input type="submit" name="submit" class="btn btn-info btn-md" value="Acessar">
+									<input type="submit" name="esqeuci" class="btn btn-info btn-md" value="Esqueci">
 								</div>
 								<div id="register-link" class="text-right">
 									<a href="/cadastro" class="text-info">Cadastre-se aqui</a>
@@ -39,7 +42,7 @@
 				<br/>
 				<% if(validacao.length > 0) {%>
 					<div class="row justify-content-center">
-						<div class="col-md-6">
+						<div class="col-sm-6">
 							<div class="alert alert-danger">
 								<strong>Atenção!</strong>
 								<ul>
