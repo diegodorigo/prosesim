@@ -41,6 +41,10 @@
     cursor: pointer;
 }
 
+.topopagina{
+    background-color: rgb(255, 255, 255) ;   
+}
+
 .bodylogin {
     margin: 0;
     padding: 0;

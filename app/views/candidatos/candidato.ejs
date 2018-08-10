@@ -21,41 +21,33 @@
 		<br/>
 		<br/>
 		<br/>
-		<br/>
-		<div class="container">				
-			<ul class="nav nav-pills">
-				<li class="active"><a href"#">DADOS</a></li>
-				<li><a href="#">FORMAÇÃO</a></li>
-				<li><a href="#">TEMPO DE SERVIÇO</a></li>
-				<li><a href="#">ÁREA PLEITEADA</a></li>
-			</ul>
-		</div>
-		
-		<div class="container">
+
+		<div class="col-md-12">
+			<h3>DADOS DO CANDIDATO</h3>
 			<% if(candidato.length > 0) { %>
 				<div class="row"> 
-					<div class="col-md-2"> <label class="text-info">Nome:</label></div>
-					<div class="col-md-10"><label class="text"><%=candidato[0].nome%></label></div>
+					<div class="col-md-3"> <label class="text-info">Nome</label></div>
+					<div class="col-md-9"><label class="text"><%=candidato[0].nome%></label></div>
 				</div>
 				<div class="row">
-					<div class="col-md-2"><label class="text-info">Email:</label></div>
-					<div class="col-md-10"><label class="text"><%=candidato[0].email%></label></div>
+					<div class="col-md-3"><label class="text-info">Email</label></div>
+					<div class="col-md-9"><label class="text"><%=candidato[0].email%></label></div>
 				</div>
 				<div class="row">	
-					<div class="col-md-2"><label class="text-info">Nascimento:</label></div>
-					<div class="col-md-10"><label class="text"><%=candidato[0].nascimento%></label></div>
+					<div class="col-md-3"><label class="text-info">Nascimento</label></div>
+					<div class="col-md-9"><label class="text"><%=candidato[0].nascimento%></label></div>
 				</div>
 				<div class="row">	
-					<div class="col-md-2"><label class="text-info">CPF:</label></div>
-					<div class="col-md-10"><label class="text"><%=candidato[0].cpf%></label></div>
+					<div class="col-md-3"><label class="text-info">CPF</label></div>
+					<div class="col-md-9"><label class="text"><%=candidato[0].cpf%></label></div>
 				</div>
 				<div class="row">
-					<div class="col-md-2"><label class="text-info">Identidade:</label></div>
-					<div class="col-md-10"><label class="text"><%=candidato[0].identidade%></label></div>	
+					<div class="col-md-3"><label class="text-info">Identidade</label></div>
+					<div class="col-md-9"><label class="text"><%=candidato[0].identidade%></label></div>	
 				</div>				
 				<div class="row">
-					<div class="col-md-2"><label class="text-info">Endereço:</label></div>
-					<div class="col-md-10"><label class="text">
+					<div class="col-md-3"><label class="text-info">Endereço</label></div>
+					<div class="col-md-9"><label class="text">
 						<%=candidato[0].logradouro%>
 						<%=candidato[0].numero%> - 
 						<%=candidato[0].bairro%> - 
@@ -64,30 +56,57 @@
 					</label></div>
 				</div>
 				<div class="row">
-					<div class="col-md-2"><label class="text-info">Telefone 1:</label></div>
-					<div class="col-md-10"><label class="text"><%=candidato[0].telefone1%></label></div>
+					<div class="col-md-3"><label class="text-info">Telefone 1</label></div>
+					<div class="col-md-9"><label class="text"><%=candidato[0].telefone1%></label></div>
 				</div>	
 				<% if (candidato[0].telefone2 != '') { %>
 					<div class="row">
-						<div class="col-md-2"><label class="text-info">Telefone 2:</label></div>
-						<div class="col-md-10"><label class="text"><%=candidato[0].telefone2%></label></div>	
+						<div class="col-md-3"><label class="text-info">Telefone 2</label></div>
+						<div class="col-md-9"><label class="text"><%=candidato[0].telefone2%></label></div>	
 					</div>
 				<% } %>	
 				<div class="row">
-					<div class="col-md-2"><label class="text-info">Possui Deficiência?</label></div>
-					<div class="col-md-10"><label class="text"><%=candidato[0].deficiente%></label></div>
+					<div class="col-md-3"><label class="text-info">Possui Deficiência?</label></div>
+					<div class="col-md-9"><label class="text"><%=candidato[0].deficiente%></label></div>
 				</div>
 				<% if (candidato[0].deficiente == 'SIM') { %>
 					<div class="row">
-						<div class="col-md-2"><label class="text-info">Tipo deficiência:</label></div>
-						<div class="col-md-10"><label class="text"><%=candidato[0].deficiencia%></label></div>
+						<div class="col-md-3"><label class="text-info">Tipo deficiência</label></div>
+						<div class="col-md-9"><label class="text"><%=candidato[0].deficiencia%></label></div>
 					</div>
 				<% } %>
-				<div class="row">
-					<div class="col-md-2"> <label class="text-info">Formação:</label></div>
-					<div class="col-md-10"><label class="text"><%=candidato[0].descricaoformacao%></label></div>
-				</div>				
 			<% } %>
 		</div>
+
+		<% if (candidato[0].codigoformacao != null) { %>
+			<div class="col-md-12">
+				<h3>FORMAÇÃO/OUTROS CURSOS</h3>
+				<div class="row">
+					<div class="col-md-3"> <label class="text-info">Formação</label></div>
+					<div class="col-md-9"><label class="text"><%=candidato[0].codigoformacao%></label></div>
+				</div>
+				<div class="row">
+					<div class="col-md-3"> <label class="text-info">Outros cursos</label></div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<h3>ÁREA PLEITEADA</h3>
+				<div class="row">
+					<div class="col-md-3"> <label class="text-info">Opção 1</label></div>
+				</div>
+				<div class="row">
+					<div class="col-md-3"> <label class="text-info">Opção 2</label></div>
+				</div>
+			</div>
+
+		<% } else { %>	
+			<form class="form" action="/inscricao" method="get">
+				<div class="col-sm-12">
+					<br/>
+					<input type="submit" class="btn btn-info btn-md" value="Realizar inscrição">
+				</div>
+			</form>	
+		<% } %>
+
 	</body>
 </html>

@@ -7,8 +7,8 @@ var connMySQL = function(){
 		password : '1234',
 		database : 'prosesim'
 	});
-}
+};
 
 module.exports = function (){
 	return connMySQL;
-}
+};
