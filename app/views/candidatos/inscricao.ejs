@@ -2,10 +2,11 @@
 <html>
 	<head>
 		<title>PROSESIM | Cadastro</title>
-		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-		<link href="css/style.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+		<link href="css/style.css" rel="stylesheet">		
+		<script src="js/jquery-2.2.1.js"></script>
 		<script src="js/input_mask.js"></script>
 	</head>
 	<body class="body">			
@@ -22,5 +23,158 @@
 		<br/>
 		<br/>
 		<br/>
+		<!-- VALIDAÇÃO -->
+		<div class="container">
+			<div class="row">				
+				<% if (validacao.length > 0) { %>
+					<div class="col-sm-12">
+						<div class="alert alert-danger">
+							<strong>Atenção!</strong>
+							<ul>
+								<% for(var i = 0; i < validacao.length; i++) { %>									
+									<li><%= validacao[i].msg %></li>
+								<% } %>
+							</ul>
+						</div>
+					</div>
+				<% } %>
+			</div>
+		</div>
+
+		<div class="container">
+			<form class="form" action="/inscricao" method="post">
+				<input type="hidden" name="codigocandidato" id="codigocandidato" value="<%=candidato.codigocandidato%>" class="form-control">
+				<input type="hidden" name="cpf" id="cpf" value="<%=candidato.cpf%>" class="form-control">
+				<input type="hidden" name="opcao" id="opcao" value="<%=candidato.opcao%>" class="form-control">
+				<!-- ÁREA PLEITEADA -->
+				<script>
+					function myFunction() {
+						var x = document.getElementById("codigoarea").value;
+						document.getElementById("demo").innerHTML = x;										
+					}
+				</script>							
+
+				<div class="col-sm-12">
+					<h4 class="text-left text-info">Área Pleiteada</h4>	
+					<% if(areas.length > 0) { %>
+						<div class="form-group">								
+							<label class="col-sm-12" for="codigoarea">
+								<select class="form-control" name="codigoarea" id="codigoarea" onchange="myFunction()">
+									<option value="0">Selecione uma opção...</option>
+									<% for (var i = 0; i < areas.length; i++) { %>	
+										<option value="<%=areas[i].codigoarea%>"><%=areas[i].descricao%></option>										
+									<% } %>		
+								</select>
+							</label>							
+							 <div class="col-sm-12">								
+								<div class="alert alert-warning">
+									<strong >Pré-requisitos:</strong><br>
+									<p id="demo"></p> 
+									
+								</div>									
+							</div>
+							<div class="col-sm-12">
+								<input type="checkbox" name="aceite" id="aceite" value="Sim" required> Estou ciente dos pré-requisitos para área selecionada que estão descritos no item 3 do edital.<br>									
+							</div>
+						</div>
+					<% } %>					
+				</div>	
+				
+				<!-- FORMAÇÃO ACADEMICA -->				
+				<div class="col-sm-12">
+					<h4 class="text-left text-info">Formação acadêmica</h4>
+					<% if(formacoes.length > 0) { %>
+						<div class="form-group">								
+							<label  class="col-sm-12" for="codigoformacao">
+								<select class="form-control" name="codigoformacao" id="codigoformacao" >
+									<% for (var i = 0; i < formacoes.length; i++) { %>	
+										<option value="<%=formacoes[i].codigoformacao%>"><%=formacoes[i].descricao%></option>
+									<% } %>		
+								</select>
+							</label>								
+						</div>
+					<% } %>
+				</div>
+				<!-- CURSO OPÇÃO 1 -->
+				<div class="col-sm-12">
+					<h4 class="text-left text-info">Cursos de Formação na Área/Função Pleiteada (OPÇÃO 1)</h4>	
+					<% if(cursos.length > 0) { %>
+						<div class="form-group">								
+							<label  class="col-sm-12" for="codigocurso1">
+								<select class="form-control" name="codigocurso1" id="codigocurso1" >
+									<% for (var i = 0; i < cursos.length; i++) { %>	
+										<option value="<%=cursos[i].codigocurso%>"><%=cursos[i].descricao%></option>
+									<% } %>		
+								</select>
+							</label>								
+						</div>
+					<% } %>
+				</div>
+				<!-- CURSO OPÇÃO 2 -->
+				<div class="col-sm-12">
+					<h4 class="text-left text-info">Cursos de Formação na Área/Função Pleiteada (OPÇÃO 2)</h4>	
+					<% if(cursos.length > 0) { %>
+						<div class="form-group">								
+							<label  class="col-sm-12" for="codigocurso2">								
+								<select class="form-control" name="codigocurso2" id="codigocurso2">
+									<% for (var i = 0; i < cursos.length; i++) { %>	
+										<option value="<%=cursos[i].codigocurso%>"><%=cursos[i].descricao%></option>
+									<% } %>	
+								</select>								
+							</label>								
+						</div>
+					<% } %>
+				</div>
+				<!-- TEMPO DE SERVIÇO -->
+				<div class="col-md-12">
+					<h4 class="text-left text-info">Tempo de serviço</h4>
+					<li><a href="#novafuncao" data-toggle="modal">Nova função</a></li>
+				</div>				
+				<!-- SALVAR -->
+				<div class="col-sm-6">
+					<br/>
+					<input type="submit" class="btn btn-info btn-md" value="Salvar">
+				</div>
+			</form>	
+
+			<!-- MODAL -->
+			<div class="modal fade" id="novafuncao" role="dialog">
+				<div class="modal-dialog modal-md">					
+					<div class="modal-content">
+						<form class="form-horizontal">
+							<div class="modal-header">
+								<h4>Inserir nova função</h4>
+							</div>
+							<div class="col-sm-12">
+								<div class="modal-body">								
+									<div class="form-group">
+										<label for="descricao" control-label>Descrição: </label>
+										<div>
+											<input type="text" class="form-control" id="descricao" name="descricao" placeholder="Informe a nova função...">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="datainicial" control-label>Data inicial: </label>
+										<div>
+											<input type="date" class="form-control" id="datainicial" name="datainicial">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="datafinal" control-label>Data final: </label>
+										<div >
+											<input type="date" class="form-control" id="datafinal" name="datafinal">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+								<button type="button" class="btn btn-primary">Salvar</button>
+							</div>
+						</form>
+					</div>		
+				</div>				
+			</div>						
+		</div>
 	</body>
 </html>

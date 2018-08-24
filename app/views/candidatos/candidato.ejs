@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>PROSESIM | Candidato</title>
-		<script src="js/jquery-2.2.1.js"></script>
+		<title>PROSESIM | Candidato</title>		
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 		<link href="css/style.css" rel="stylesheet">
+		<script src="js/jquery-2.2.1.js"></script>
 	</head>
 	<body>
 		<div class="menu">
@@ -22,91 +21,246 @@
 		<br/>
 		<br/>
 
-		<div class="col-md-12">
-			<h3>DADOS DO CANDIDATO</h3>
-			<% if(candidato.length > 0) { %>
-				<div class="row"> 
-					<div class="col-md-3"> <label class="text-info">Nome</label></div>
-					<div class="col-md-9"><label class="text"><%=candidato[0].nome%></label></div>
-				</div>
-				<div class="row">
-					<div class="col-md-3"><label class="text-info">Email</label></div>
-					<div class="col-md-9"><label class="text"><%=candidato[0].email%></label></div>
-				</div>
-				<div class="row">	
-					<div class="col-md-3"><label class="text-info">Nascimento</label></div>
-					<div class="col-md-9"><label class="text"><%=candidato[0].nascimento%></label></div>
-				</div>
-				<div class="row">	
-					<div class="col-md-3"><label class="text-info">CPF</label></div>
-					<div class="col-md-9"><label class="text"><%=candidato[0].cpf%></label></div>
-				</div>
-				<div class="row">
-					<div class="col-md-3"><label class="text-info">Identidade</label></div>
-					<div class="col-md-9"><label class="text"><%=candidato[0].identidade%></label></div>	
-				</div>				
-				<div class="row">
-					<div class="col-md-3"><label class="text-info">Endereço</label></div>
-					<div class="col-md-9"><label class="text">
-						<%=candidato[0].logradouro%>
-						<%=candidato[0].numero%> - 
-						<%=candidato[0].bairro%> - 
-						<%=candidato[0].municipio%>/
-						<%=candidato[0].estado%>
-					</label></div>
-				</div>
-				<div class="row">
-					<div class="col-md-3"><label class="text-info">Telefone 1</label></div>
-					<div class="col-md-9"><label class="text"><%=candidato[0].telefone1%></label></div>
-				</div>	
-				<% if (candidato[0].telefone2 != '') { %>
-					<div class="row">
-						<div class="col-md-3"><label class="text-info">Telefone 2</label></div>
-						<div class="col-md-9"><label class="text"><%=candidato[0].telefone2%></label></div>	
-					</div>
-				<% } %>	
-				<div class="row">
-					<div class="col-md-3"><label class="text-info">Possui Deficiência?</label></div>
-					<div class="col-md-9"><label class="text"><%=candidato[0].deficiente%></label></div>
-				</div>
-				<% if (candidato[0].deficiente == 'SIM') { %>
-					<div class="row">
-						<div class="col-md-3"><label class="text-info">Tipo deficiência</label></div>
-						<div class="col-md-9"><label class="text"><%=candidato[0].deficiencia%></label></div>
-					</div>
-				<% } %>
-			<% } %>
-		</div>
-
-		<% if (candidato[0].codigoformacao != null) { %>
+		<form id="candidato-insc" class="form" action="/candidato" method="post">
 			<div class="col-md-12">
-				<h3>FORMAÇÃO/OUTROS CURSOS</h3>
-				<div class="row">
-					<div class="col-md-3"> <label class="text-info">Formação</label></div>
-					<div class="col-md-9"><label class="text"><%=candidato[0].codigoformacao%></label></div>
-				</div>
-				<div class="row">
-					<div class="col-md-3"> <label class="text-info">Outros cursos</label></div>
+				<h3>DADOS DO CANDIDATO</h3>
+				<div class="col-md-12">
+					<% if(candidato.length > 0) { %>
+						<input type="hidden" name="codigocandidato" id="codigocandidato" value="<%=candidato[0].codigocandidato%>" class="form-control">
+						<input type="hidden" name="cpf" id="cpf" value="<%=candidato[0].cpf%>" class="form-control">
+						<div class="row"> 
+							<div class="col-md-2"><label class="text-info">Nome</label></div>
+							<div class="col-md-10"><label class="text"><%=candidato[0].nome%></label></div>
+						</div>
+						<div class="row">
+							<div class="col-md-2"><label class="text-info">Email</label></div>
+							<div class="col-md-10"><label class="text"><%=candidato[0].email%></label></div>
+						</div>
+						<div class="row">	
+							<div class="col-md-2"><label class="text-info">Nascimento</label></div>
+							<div class="col-md-10"><label class="text"><%=candidato[0].nascimento%></label></div>
+						</div>
+						<div class="row">	
+							<div class="col-md-2"><label class="text-info">CPF</label></div>
+							<div class="col-md-10"><label class="text"><%=candidato[0].cpf%></label></div>
+						</div>
+						<div class="row">
+							<div class="col-md-2"><label class="text-info">Identidade</label></div>
+							<div class="col-md-10"><label class="text"><%=candidato[0].identidade%></label></div>	
+						</div>				
+						<div class="row">
+							<div class="col-md-2"><label class="text-info">Endereço</label></div>
+							<div class="col-md-10"><label class="text">
+								<%=candidato[0].logradouro%>
+								<%=candidato[0].numero%> - 
+								<%=candidato[0].bairro%> - 
+								<%=candidato[0].municipio%>/
+								<%=candidato[0].estado%>
+							</label></div>
+						</div>
+						<div class="row">
+							<div class="col-md-2"><label class="text-info">Telefone 1</label></div>
+							<div class="col-md-10"><label class="text"><%=candidato[0].telefone1%></label></div>
+						</div>	
+						<% if (candidato[0].telefone2 != '') { %>
+							<div class="row">
+								<div class="col-md-2"><label class="text-info">Telefone 2</label></div>
+								<div class="col-md-10"><label class="text"><%=candidato[0].telefone2%></label></div>	
+							</div>
+						<% } %>	
+						<div class="row">
+							<div class="col-md-2"><label class="text-info">Possui Deficiência?</label></div>
+							<div class="col-md-10"><label class="text"><%=candidato[0].deficiente%></label></div>
+						</div>
+						<% if (candidato[0].deficiente == 'SIM') { %>
+							<div class="row">
+								<div class="col-md-2"><label class="text-info">Tipo deficiência</label></div>
+								<div class="col-md-10"><label class="text"><%=candidato[0].deficiencia%></label></div>
+							</div>
+						<% } %>
+					<% } %>
 				</div>
 			</div>
-			<div class="col-md-12">
-				<h3>ÁREA PLEITEADA</h3>
-				<div class="row">
-					<div class="col-md-3"> <label class="text-info">Opção 1</label></div>
-				</div>
-				<div class="row">
-					<div class="col-md-3"> <label class="text-info">Opção 2</label></div>
-				</div>
-			</div>
+						
+			<% if (inscricao1 != '') { %>
+				<div class="col-md-12">
+					<h3>INSCRIÇÃO DO CANDIDATO (OPÇÃO <%=inscricao1.opcao%>)</h3>
+					<!-- área pleiteada da opção 1 -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-2"> <label class="text-info">Área pleiteada</label></div>
+							<div class="col-md-10"><label class="text"><%=inscricao1.descricaoarea%></label></div>
+						</div>
+					</div>
+					<!-- formação acadêmica da opção 1 -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-2"> <label class="text-info">Formação acadêmica</label></div>
+							<div class="col-md-10"><label class="text"><%=inscricao1.descricaoformacao%></label></div>
+						</div>
+					</div>	
+					<!-- cursos da opção 1 -->
+					<% if (cursosInsc1 != '') { %>
+						<% for(var i = 0; i < cursosInsc1.length; i++) { %>
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-md-2"> <label class="text-info">Curso <%=i+1%></label></div>
+									<div class="col-md-10"><label class="text"><%=cursosInsc1[i].descricao%></label></div>
+								</div>
+							</div>		
+						<% } %>
+					<% } %>	
+					<!-- funções da opção 1 -->			
+						
+						<div class="col-md-12"> <label class="text-info">Tempo de serviço</label></div>
+						<div class="col-md-12">
+							<div class="table-responsive-md">
+								<table class="table">
+									<thead class="thead-dark">
+										<td class="text">Função</td>
+										<td class="text">Data inicial</td>
+										<td class="text">Data final</td>
+										<td class="text">Total de dias</td>
+									</thead>
+									<% for(var i = 0; i < funcoesInsc1.length; i++) { %>
+									<tbody>
+										<td><%=funcoesInsc1[i].descricao%></td>
+										<td><%=funcoesInsc1[i].datainicial%></td>
+										<td><%=funcoesInsc1[i].datafinal%></td>
+										<td><%=funcoesInsc1[i].totaldias%></td>
+									</tbody>
+									<% } %>
+									<tbody>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td><%=diasFuncao1%> pontos *</td>
+									</tbody>						
+								</table>									
+							</div>
+						</div>
+					
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-2"> <label class="text-info">Total de pontos</label></div>
+							<div class="col-md-10"><label class="text"><%=totalPontos1%></label></div>
+						</div>						
+					</div>
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-2"> <label class="text-info">Data/Hora da inscrição</label></div>
+							<div class="col-md-10"><label class="text"><%=inscricao1.datainscricao%></label></div>
+						</div>						
+					</div>
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-2"> <label class="text-info">Protocolo</label></div>
+							<div class="col-md-10"><label class="text"><%=inscricao1.protocolo%></label></div>
+						</div>						
+					</div>
+					<div class="col-md-12">
+						<p class="obs">* Calculado pela fórmula (soma dos dias * 0.01) com limite máximo de 10 pontos</p>	
+					</div>
+					
+					<div class="col-md-12"><div class="row"><label class="text-info"></label></div></div>
 
-		<% } else { %>	
-			<form class="form" action="/inscricao" method="get">
-				<div class="col-sm-12">
+					<% if (inscricao2 != '') { %>	
+						<h3>INSCRIÇÃO DO CANDIDATO (OPÇÃO <%=inscricao2.opcao%>)</h3>
+						<!-- área pleiteada da opção 2 -->
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-2"> <label class="text-info">Área pleiteada</label></div>
+								<div class="col-md-10"><label class="text"><%=inscricao2.descricaoarea%></label></div>
+							</div>
+						</div>
+						<!-- formação acadêmica da opção 2 -->
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-2"> <label class="text-info">Formação acadêmica</label></div>
+								<div class="col-md-10"><label class="text"><%=inscricao2.descricaoformacao%></label></div>
+							</div>
+						</div>	
+						<!-- cursos da opção 2 -->
+						<% if (cursosInsc2 != '') { %>
+							<% for(var i = 0; i < cursosInsc2.length; i++) { %>
+								<div class="col-md-12">
+									<div class="row">
+										<div class="col-md-2"> <label class="text-info">Curso <%=i+1%></label></div>
+										<div class="col-md-10"><label class="text"><%=cursosInsc2[i].descricao%></label></div>
+									</div>
+								</div>		
+							<% } %>
+						<% } %>		
+						<!-- funções da opção 2 -->	
+							
+							<div class="col-md-12"> <label class="text-info">Tempo de serviço</label></div>
+							<div class="col-md-12">
+								<div class="table-responsive-md">
+									<table class="table">
+										<thead class="thead-dark">
+											<td class="text">Função</td>
+											<td class="text">Data inicial</td>
+											<td class="text">Data final</td>
+											<td class="text">Total de dias</td>
+										</thead>
+										<% for(var i = 0; i < funcoesInsc2.length; i++) { %>
+										<tbody>
+											<td><%=funcoesInsc2[i].descricao%></td>
+											<td><%=funcoesInsc2[i].datainicial%></td>
+											<td><%=funcoesInsc2[i].datafinal%></td>
+											<td><%=funcoesInsc2[i].totaldias%></td>
+										</tbody>
+										<% } %>
+										<tbody>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td><%=diasFuncao2%> pontos *</td>
+										</tbody>
+									</table>	
+								</div>
+							</div>
+					
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-2"> <label class="text-info">Total de pontos</label></div>
+								<div class="col-md-10"><label class="text"><%=totalPontos2%></label></div>
+							</div>						
+						</div>
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-2"> <label class="text-info">Data/Hora da inscrição</label></div>
+								<div class="col-md-10"><label class="text"><%=inscricao2.datainscricao%></label></div>
+							</div>						
+						</div>
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-2"> <label class="text-info">Protocolo</label></div>
+								<div class="col-md-10"><label class="text"><%=inscricao2.protocolo%></label></div>
+							</div>						
+						</div>
+						<div class="col-md-12">
+							<p class="obs">* Calculado pela fórmula (soma dos dias * 0.01) com limite máximo de 10 pontos</p>	
+						</div>
+
+						<div class="col-md-12"><div class="row"><label class="text-info"></label></div></div>
+					<% } else { %>
+						<!--BOTÃO Realizar inscrição (2ª opção)-->
+						<div class="col-md-12">
+							<br/>
+							<input type="submit" class="btn btn-info btn-md" value="Realizar inscrição (2ª opção)">
+							<input type="hidden" name="opcao" id="opcao" value="2" class="form-control">
+						</div>						
+					<% } %>	
+				</div>						
+			<% } else { %>	
+				<!--BOTÃO Realizar inscrição (1ª opção)-->
+				<div class="col-md-12">
 					<br/>
-					<input type="submit" class="btn btn-info btn-md" value="Realizar inscrição">
+					<input type="submit" class="btn btn-info btn-md" value="Realizar inscrição (1ª opção)">
+					<input type="hidden" name="opcao" id="opcao" value="1" class="form-control">
 				</div>
-			</form>	
-		<% } %>
-
+			<% } %>				
+		</form>	
 	</body>
 </html>

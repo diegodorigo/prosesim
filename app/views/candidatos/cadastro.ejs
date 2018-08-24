@@ -21,24 +21,24 @@
 		<br/>
 		<br/>
 		<br/>
-
+		<!-- VALIDAÇÃO -->
 		<div class="container">
-				<div class="row">				
-						<% if (validacao.length > 0) { %>
-							<div class="col-sm-12">
-								<div class="alert alert-danger">
-									<strong>Atenção!</strong>
-									<ul>
-										<% for(var i = 0; i < validacao.length; i++) { %>									
-											<li><%= validacao[i].msg %></li>
-										<% } %>
-									</ul>
-								</div>
-							</div>
-						<% } %>
+			<div class="row">				
+				<% if (validacao.length > 0) { %>
+					<div class="col-sm-12">
+						<div class="alert alert-danger">
+							<strong>Atenção!</strong>
+							<ul>
+								<% for(var i = 0; i < validacao.length; i++) { %>									
+									<li><%= validacao[i].msg %></li>
+								<% } %>
+							</ul>
+						</div>
 					</div>
+				<% } %>
 			</div>
-	
+		</div>
+			<!-- DADOS GERAIS -->
 			<div class="container">
 				<form class="form" action="/cadastro" method="post">
 					<h4 class="text-left text-info">Identificação do canditado</h4>	
@@ -51,7 +51,7 @@
 					</div>
 					<div class="col-sm-12">
 						<label class="text-info">Email <h11>*</h11></label>
-						<input type="email" name="email" id="email" value="<%=dadosForm.email%>" class="form-control" maxlength="120">
+						<input type="email" name="email" id="email" value="<%=dadosForm.email%>" class="form-control" readonly="true">
 					</div>						
 					<div class="col-sm-4">
 						<label class="text-info">Nascimento <h11>*</h11></label>

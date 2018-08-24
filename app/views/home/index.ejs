@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>PROSESIM</title>
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -14,36 +15,9 @@
 				<img src="images/logo.jpg" class="mx-auto d-block">
 			</div>
 			
-			<h3 class="text-center text-white pt-5">SECRETARIA MUNICIPAL DE EDUCAÇÃO</h3>
-			<h4 class="text-center text-white pt-4">PROCESSO SELETIVO SIMPLIFICADO - EDITAL Nº 006/2018</h4>
+			<h3 class="text-center text-white pt-4">SECRETARIA MUNICIPAL DE EDUCAÇÃO</h3>
+			<h5 class="text-center text-white pt-3">PROCESSO SELETIVO SIMPLIFICADO - EDITAL Nº 006/2018</h5>
 			<div class="container">
-				<div id="login-row" class="row justify-content-center align-items-center">
-					<div id="login-column" class="col-sm-6">
-						<div id="login-box" class="col-sm-12">
-							<form id="login-form" class="form" action="/" method="post">
-								<h3 class="text-center text-info">Acesso ao sistema</h3>
-								<div class="form-group">
-									<label for="username" class="text-info">CPF:</label><br>
-									<input type="text" name="cpf" id="cpf" value="<%=dadosForm.cpf%>" class="form-control" onkeydown="javascript: fMasc(this, mCPF);" maxlength="14">
-								</div>
-								<div class="form-group">
-									<label for="password" class="text-info">Senha:</label><br>
-									<input type="password" name="senha" id="senha" value="<%=dadosForm.senha%>" class="form-control">
-								</div>
-								<div class="form-group">
-									<label for="remember" class="text-info"><span>Lembre-me a senha</span> </label>
-									<span><input type="checkbox" id="remember" name="remember" ></span>
-									<br>
-									<input type="submit" name="submit" class="btn btn-info btn-md" value="Acessar">
-								</div>
-								<div id="register-link" class="text-right">
-									<a href="/cadastro" class="text-info">Cadastre-se aqui</a>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				<br/>
 				<% if(validacao.length > 0) {%>
 					<div class="row justify-content-center">
 						<div class="col-sm-6">
@@ -58,6 +32,48 @@
 						</div>
 					</div>			
 				<% } %> 
+				<% if(informacao.length > 0) {%>
+					<div class="row justify-content-center">
+						<div class="col-sm-6">
+							<div class="alert alert-success">
+								<strong>Tudo certo!</strong>
+								<ul>
+									<% for(var i = 0; i < informacao.length; i++){ %>
+										<li><%= informacao[i].msg %></li>
+									<% } %>
+								</ul>
+							</div>
+						</div>
+					</div>			
+				<% } %> 				
+				<div id="login-row" class="row justify-content-center align-items-center">
+					<div id="login-column" class="col-md-6">
+						<div id="login-box" class="col-sm-12">
+							<form id="login-form" class="form" action="/" method="post">
+								<h3 class="text-center text-info">Acesso ao sistema</h3>
+								<div class="form-group">
+									<label for="username" class="text-info">CPF:</label><br>
+									<input type="text" name="cpf" id="cpf" value="<%=dadosForm.cpf%>" class="form-control" onkeydown="javascript: fMasc(this, mCPF);" maxlength="14">
+								</div>
+								<div class="form-group">
+									<label for="password" class="text-info">Senha:</label><br>
+									<input type="password" name="senha" id="senha" value="<%=dadosForm.senha%>" class="form-control">
+								</div>
+								<div class="form-group">
+									<label for="remember" class="text-info"><span>Esqueci a senha</span> </label>
+									<span><input type="checkbox" id="remember" name="remember" ></span>
+									<br/>
+									<input type="submit" name="submit" class="btn btn-info btn-md" value="Acessar">
+								</div>
+								<div id="register-link" class="text-right">
+									<a href="/email" class="text-info">Cadastre-se aqui</a>
+								</div>								
+							</form>
+						</div>
+					</div>
+				</div>
+				<br/>
+				
 			</div>
 		</div>
 	</body>

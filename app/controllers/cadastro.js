@@ -1,15 +1,15 @@
-module.exports.acessaCadastro = function(application, req, res) {
-	res.render("candidatos/cadastro", {validacao : {}, dadosForm : {}});
-};
+//module.exports.acessaCadastro = function(application, req, res) {
+//	res.render("candidatos/cadastro", {validacao : {}, dadosForm : {}});
+//};
 
 module.exports.incluiCandidato = function(application, req, res) {
-	var connection = application.config.dbConnection();
-	var ProsesimModel = new application.app.models.ProsesimDAO(connection);   
-	var dadosForm = req.body;
-	var erros = [];
-	var cpfValid = require('node-cpf-cnpj');	
+	var connection      = application.config.dbConnection();
+	var CandidatosModel = new application.app.models.CandidatosDAO(connection); 
+	var dadosForm       = req.body;
+	var erros           = [];
+	var cpfValid        = require('node-cpf-cnpj');	
 		
-	ProsesimModel.checkUser(dadosForm.cpf, function(error, result){
+	CandidatosModel.checkUser(dadosForm.cpf, function(error, result){
 		if (result != ''){	
 			erros = [{location: 'body', param: 'cpf', msg: 'CPF já cadastrado!', value: dadosForm.cpf}]
 		};
@@ -37,11 +37,18 @@ module.exports.incluiCandidato = function(application, req, res) {
 			return;
 		};
 
-		ProsesimModel.salvarCandidato(dadosForm, function(error, result){
+		CandidatosModel.salvarCandidato(dadosForm, function(error, result){
 			var dateFormat = require('dateformat');
-			ProsesimModel.getCandidato(dadosForm.cpf, function(error, result){
-				result[0].nascimento = dateFormat(result[0].nascimento, "dd/mm/yyyy");
-				res.render("candidatos/candidato", {candidato : result});
+			CandidatosModel.getCandidato(dadosForm.cpf, function(error, resultcandidato){
+				resultcandidato[0].nascimento = dateFormat(resultcandidato[0].nascimento, "dd/mm/yyyy");
+				res.render("candidatos/candidato", {candidato : resultcandidato, 
+					inscricao1 : [], inscricao2 : [],
+					cursosInsc1 : [], cursosInsc2 : [],
+					funcoesInsc1 : [], funcoesInsc2 : [],
+					diasFuncao1 : 0, diasFuncao2 : 0,
+					pontosCursos1 : 0, pontosCursos2 : 0,
+					totalPontos1 : 0 , totalPontos2 : 0
+				});
 			});
 		});   
 	}); 
