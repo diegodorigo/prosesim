@@ -6,8 +6,8 @@ var connMail = nodemailer.createTransport({
     port: 587,
     tls:{rejectUnauthorized: false},
     auth: {
-        user: 'diego@tecsystem.info',
-        pass: 'DdNbAsS@12'
+        user: 'processoseletivo.guarapari@gmail.com',
+        pass: '35421429'
     }
 });	
 

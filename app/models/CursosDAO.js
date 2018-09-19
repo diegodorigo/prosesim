@@ -16,13 +16,13 @@ CursosDAO.prototype.getCursosInscricao = function(codigoinscricao, callback){
 		'tabcursos.descricao, tabcursos.pontos as pontoscursos from tabcursosinscricao ' +
 		'join tabcursos on tabcursosinscricao.codigocurso = tabcursos.codigocurso '+
 		'where tabcursosinscricao.codigoinscricao = ' + codigoinscricao, callback
-	);
+	);	
 };
 
 CursosDAO.prototype.deleteCursosInscricao = function(codigoinscricao, callback){
 	this._connection.query('delete from tabcursosinscricao where codigoinscricao = '+ codigoinscricao, callback);
 };
 
-module.exports = function(){
+module.exports = function(){	
 	return CursosDAO;
 };

@@ -1,7 +1,7 @@
 module.exports.acessaCadastro = function(application, req, res) {   
     var dadosForm = req.body;
     
-    req.assert('email', 'Antes de realizar a verificação, insira um email no campo "E-mail do candidato" e clique no botão Enviar!').notEmpty();    
+    req.assert('email', 'Antes de realizar a verificação, insira um email no campo "PASSO 1 - E-mail" e clique no botão Enviar!').notEmpty();    
     var erros = req.validationErrors();    
     if (erros){
         res.render("candidatos/email", {validacao : erros, informacao : {}, dadosForm : {}});
@@ -20,6 +20,6 @@ module.exports.acessaCadastro = function(application, req, res) {
         res.render("candidatos/email", {validacao : erros, informacao : {}, dadosForm : dadosForm});
         return;  
     } else {
-        res.render("candidatos/cadastro", {validacao : erros, dadosForm : dadosForm});     
+        res.render("candidatos/cadastro", {acao : 1, validacao : erros, dadosForm : dadosForm});     
     };    
 };

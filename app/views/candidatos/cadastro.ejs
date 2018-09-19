@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>PROSESIM | Cadastro</title>
+		<title>Cadastro | Processo Seletivo</title>
+		<link rel="shortcut icon" href="/images/School.ico" type="image/x-icon">
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 		<link href="css/style.css" rel="stylesheet">
 		<script src="js/input_mask.js"></script>
 	</head>
-	<body class="body">			
+	<body class="body">	
+		<body onLoad="history.go(+1); ">		
 		<div class="menu">
 			<div class="container-fluid">
 				<div>
@@ -40,7 +42,7 @@
 		</div>
 			<!-- DADOS GERAIS -->
 			<div class="container">
-				<form class="form" action="/cadastro" method="post">
+				<form class="form" action="/cadastro_salvar" method="post">
 					<h4 class="text-left text-info">Identificação do canditado</h4>	
 					<div class="col-sm-12">
 						<p class="help-block" style="text-align: right"><h11>*</h11> Campo obrigatório </p>
@@ -59,7 +61,12 @@
 					</div>
 					<div class="col-sm-4">
 						<label class="text-info">CPF <h11>*</h11></label>
-						<input type="text" name="cpf" id="cpf" value="<%=dadosForm.cpf%>" class="form-control" onkeydown="javascript: fMasc(this, mCPF);" maxlength="14">
+						<% if(acao == 1) { %>
+							<input type="text" name="cpf" id="cpf" value="<%=dadosForm.cpf%>" class="form-control" onkeydown="javascript: fMasc(this, mCPF);" maxlength="14">
+						<% } %>
+						<% if(acao == 2) { %>	
+							<input type="text" name="cpf" id="cpf" value="<%=dadosForm.cpf%>" class="form-control" readonly="true">	
+						<% } %>
 					</div>
 					<div class="col-sm-4">
 						<label class="text-info">Identidade</label>
@@ -67,7 +74,7 @@
 					</div>	
 					<div class="col-sm-10">
 						<label class="text-info">Endereço <h11>*</h11></label>
-						<input type="text" name="logradouro" id="logradouro" value="<%=dadosForm.logradouro%>" class="form-control" maxlength="200">
+						<input type="text" name="logradouro" id="logradouro" value="<%=dadosForm.logradouro%>" class="form-control" maxlength="200" placeholder="nome da rua, avenida, etc...Exemplo: Rua Projetada">
 					</div>
 					<div class="col-sm-2">
 						<label class="text-info">Número</label>
@@ -75,15 +82,16 @@
 					</div>
 					<div class="col-sm-6">
 						<label class="text-info">Bairro <h11>*</h11></label>
-						<input type="text" name="bairro" id="bairro" value="<%=dadosForm.bairro%>" class="form-control" maxlength="50" style="text-transform: capitalize">
+						<input type="text" name="bairro" id="bairro" value="<%=dadosForm.bairro%>" class="form-control" maxlength="50">
 					</div>
 					<div class="col-sm-4">
 						<label class="text-info">Município <h11>*</h11></label>
-						<input type="text" name="municipio" id="municipio" value="<%=dadosForm.municipio%>" class="form-control" maxlength="50" style="text-transform: capitalize">
+						<input type="text" name="municipio" id="municipio" value="<%=dadosForm.municipio%>" class="form-control" maxlength="50">
 					</div>
 					<div class="col-sm-2">
 						<label class="text-info">Estado <h11>*</h11></label>
-						<input type="text" name="estado" id="estado" value="<%=dadosForm.estado%>" class="form-control" maxlength="2" style="text-transform:uppercase">
+						<input type="text" name="estado" id="estado" value="<%=dadosForm.estado%>" class="form-control" maxlength="2">
+						
 					</div>
 					<div class="col-sm-6">
 						<label class="text-info">Telefone 1 <h11>*</h11></label>
@@ -95,22 +103,48 @@
 					</div>
 					<div class="col-sm-6">
 						<label class="text-info">Candidato com deficiência</label>
-						<select name="deficiente" id="deficiente" value="<%=dadosForm.deficiente%>" class="form-control">
-							<option>NÃO</option>
-							<option>SIM</option>
+						<select name="deficiente" id="deficiente" value="<%=dadosForm.deficiente%>" class="form-control" onchange="validarDef()">
+							<% if(dadosForm.deficiente == 'Sim') { %>
+								<option>Não</option>
+								<option selected>Sim</option>
+							<% } else { %>
+								<option selected>Não</option>
+								<option>Sim</option>								
+							<% } %>
 						</select>
-											</div>
+						<script>
+							function validarDef() { 
+								var optionSelect = document.getElementById("deficiente").value;
+								if(optionSelect == "Sim" ){ 
+									document.getElementById("deficiencia").disabled = false;
+								}else{
+									document.getElementById("deficiencia").disabled = true;
+									document.getElementById("deficiencia").value = '';
+								};
+							};
+						</script>
+					</div>
 					<div class="col-sm-6">
 						<label class="text-info">Tipo da deficiência</label>
 						<input type="text" name="deficiencia" id="deficiencia" value="<%=dadosForm.deficiencia%>" class="form-control" maxlength="100">
 					</div>
+					<!-- remove espaço -->
+					<script> function Trim(str){return str.replace(/^\s+|\s+$/g,"");}</script>
 					<div class="col-sm-6">
 						<label class="text-info">Senha <h11>*</h11></label>
-						<input type="password" name="senha" id="senha" value="<%=dadosForm.senha%>" class="form-control" maxlength="20">
+						<input type="password" name="senha" id="senha" value="<%=dadosForm.senha%>" class="form-control" maxlength="20" onkeyup="this.value = Trim( this.value )" placeholder="não é permitido espaço...">
 					</div>	
 					<div class="col-sm-6">
 						<br/>
-						<input type="submit" class="btn btn-info btn-md" value="Salvar">
+						<% if(acao == 1) { %>
+							<input type="submit" class="btn btn-primary btn-md" value="Incluir">
+							<input type="hidden" name="acao" value="1" class="form-control">
+						<% } %>
+						<% if(acao == 2) { %>
+							<input type="hidden" name="codigocandidato" value="<%=dadosForm.codigocandidato%>" class="form-control">
+							<input type="hidden" name="acao" value="2" class="form-control">
+							<input type="submit" class="btn btn-primary btn-md" value="Alterar">		
+						<% } %>
 					</div>
 				</form>				
 			</div>

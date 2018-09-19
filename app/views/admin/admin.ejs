@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Admin | Processo Seletivo</title>
+		<link rel="shortcut icon" href="/images/School.ico" type="image/x-icon">
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		<link href="css/style.css" rel="stylesheet">	
+	</head>
+	<body class="body">			
+		<div class="menu">
+			<div class="container-fluid">
+				<div>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/admin" ><span class="glyphicon glyphicon-user"></span> Sair</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<br/>
+		<br/>
+		<br/>
+		<div class="col-md-12">
+			<form class="form" action="/classificacao" method="post" name="menuForm">
+				<% if(areas.length > 0) { %>					
+					<div class="col-md-6">
+						<div class="form-group">								
+							<label for="codigoarea">									
+								<select class="form-control" name="codigoarea" id="codigoarea" onchange="document.forms['menuForm'].submit();" style="font-size: 12.5px">
+									<option value="0">Selecione uma área para classificar</option>									
+									<% for (var i = 1; i < areas.length; i++) { %>	
+										<option value="<%=areas[i].codigoarea%>"><%=areas[i].descricao%></option>																			
+									<% } %>											
+								</select>
+							</label>													
+						</div>
+					</div>
+					<div class="col-md-4">
+						<input type="submit" class="btn btn-primary btn-sm" value="Listar todas">																	
+					</div>
+				<% } %>				
+			</form>
+		</div>
+		<div class="col-md-12">
+			<div class="table-responsive-md">
+				<table id="example" class="table table-responsive-md" style="width:100%; font-size: 10.5px;" >
+					<thead>
+						<tr style="background-color: #00547E; color: white;">
+							<th>ORDEM</th>
+							<th style="width:150px;">NOME</th>
+							<th>NASCIMENTO</th>
+							<th style="width:90px;">CPF</th>
+							<th>DEFICIENTE</th>
+							<th>OPÇÃO</th>
+							<th style="width:110px;">DATA/HORA</th>
+							<th>PROTOCOLO</th>
+							<th>ÁREA</th>
+							<th>FORMAÇÃO</th>
+							<th>Pts FORMAÇÃO</th>
+							<th>Pts CURSOS</th>
+							<th>Pts FUNÇÕES</th>
+							<th>TOTAL PONTOS</th>
+						</tr>
+					</thead>
+					<% for(var i = 0; i < inscricoes.length; i++) { %>						
+					<tbody>
+						<tr>
+							<td><%=i+1%>º</td>
+							<td><a href="/verifica_inscricao?id=<%=inscricoes[i].codigocandidato%>"><%=inscricoes[i].nome%></a></td>
+							<td style="text-align: center"><%=inscricoes[i].nascimento%></td>
+							<td style="text-align: center"><%=inscricoes[i].cpf%></td>
+							<td style="text-align: center"><%=inscricoes[i].deficiente%></td>
+							<td style="text-align: center"><%=inscricoes[i].opcao%></td>
+							<td style="text-align: center"><%=inscricoes[i].datainscricao%></td>
+							<td style="text-align: center"><%=inscricoes[i].protocolo%></td>
+							<td><%=inscricoes[i].descricaoarea%></td>
+							<td><%=inscricoes[i].descricaoformacao%></td>
+							<td style="text-align: right"><%=inscricoes[i].pontosformacao%></td>
+							<td style="text-align: right"><%=inscricoes[i].pontoscursos%></td>
+							<td style="text-align: right"><%=inscricoes[i].pontosfuncoes%></td>
+							<td style="text-align: right"><b><%=inscricoes[i].total%></b></td>							
+						</tr>						
+					</tbody>					
+					<% } %>
+				</table>																	
+			</div>	
+		</div>		
+	</body>
+</html>

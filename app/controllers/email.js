@@ -1,5 +1,5 @@
 module.exports.acessaVerificacao = function(application, req, res) {
-	res.render("candidatos/email", {validacao : {}, informacao : {}, dadosForm : {}});
+    res.render("candidatos/email", {validacao : {}, informacao : {}, dadosForm : req.body});
 };
 
 module.exports.enviaVerificador = function(application, req, res) {   
@@ -33,8 +33,8 @@ module.exports.enviaVerificador = function(application, req, res) {
                     '<br/>'+
                     '<p><b>O que fazer com o código acima?</b></p>'+
                     '<p>1. Selecione e copie <b>(Ctrl C)</b>;</p>'+
-                    '<p>2. Retorne para a página de <b>Verificação de Email</b>;</p>'+
-                    '<p>3. Cole <b>(Ctrl V)</b> o código no campo <b>Código verificador</b>;</p>'+
+                    '<p>2. Retorne para a página de <b>Verificação de E-mail</b>;</p>'+
+                    '<p>3. Cole <b>(Ctrl V)</b> o código no campo <b>PASSO 2 - Código verificador</b>;</p>'+
                     '<p>4. Clique no botão <b>Verificar</b>.</p>'+
                     '<p>5. Se a verificação falhar, repita o processo clicando novamente no botão <b>Enviar</b>.</p>'+
                     '<br/>'+
@@ -52,7 +52,7 @@ module.exports.enviaVerificador = function(application, req, res) {
             res.render("candidatos/email", {validacao : erros, informacao : {}, dadosForm : {}});
             return;
         } else {
-            info = [{location: 'body', param: 'email', msg: 'Código de verificação enviado para o e-mail "'+dadosForm.email+'"' , value: dadosForm.email}];
+            info = [{location: 'body', param: 'email', msg: 'Código de verificação enviado para o e-mail "'+dadosForm.email+'".' , value: dadosForm.email}];
         }
         res.render("candidatos/email", {validacao : {}, informacao : info, dadosForm : dadosForm});
     });

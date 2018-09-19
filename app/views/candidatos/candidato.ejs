@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>PROSESIM | Candidato</title>		
-		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-		<link href="css/style.css" rel="stylesheet">
+		<title>Candidato | Processo Seletivo</title>	
+		<link rel="shortcut icon" href="/images/School.ico" type="image/x-icon">	
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+		<link href="css/style.css" rel="stylesheet">		
 		<script src="js/jquery-2.2.1.js"></script>
+		<script src='http://momentjs.com/downloads/moment.min.js'></script>
 	</head>
+	<script>
+		function fcn(acaoclick){
+			if (acaoclick == 1) {
+				document.getElementById("novafuncao1").click();
+			} else {
+				if (acaoclick == 2) {
+					document.getElementById("novafuncao2").click();	
+				}	
+			}
+		}
+	</script>
 	<body>
+		<body onLoad="history.go(+1); fcn('<%=acaoclick%>');">	
 		<div class="menu">
 			<div class="container-fluid">
 				<div>
@@ -18,249 +33,439 @@
 			</div>
 		</div>
 		<br/>
-		<br/>
-		<br/>
-
-		<form id="candidato-insc" class="form" action="/candidato" method="post">
+		<br/>		
+		<!-- DADOS PESSOAIS -->
+		<div class="col-md-12">
+			<h3>DADOS PESSOAIS</h3>
 			<div class="col-md-12">
-				<h3>DADOS DO CANDIDATO</h3>
-				<div class="col-md-12">
-					<% if(candidato.length > 0) { %>
-						<input type="hidden" name="codigocandidato" id="codigocandidato" value="<%=candidato[0].codigocandidato%>" class="form-control">
-						<input type="hidden" name="cpf" id="cpf" value="<%=candidato[0].cpf%>" class="form-control">
-						<div class="row"> 
-							<div class="col-md-2"><label class="text-info">Nome</label></div>
-							<div class="col-md-10"><label class="text"><%=candidato[0].nome%></label></div>
-						</div>
-						<div class="row">
-							<div class="col-md-2"><label class="text-info">Email</label></div>
-							<div class="col-md-10"><label class="text"><%=candidato[0].email%></label></div>
-						</div>
-						<div class="row">	
-							<div class="col-md-2"><label class="text-info">Nascimento</label></div>
-							<div class="col-md-10"><label class="text"><%=candidato[0].nascimento%></label></div>
-						</div>
-						<div class="row">	
-							<div class="col-md-2"><label class="text-info">CPF</label></div>
-							<div class="col-md-10"><label class="text"><%=candidato[0].cpf%></label></div>
-						</div>
-						<div class="row">
-							<div class="col-md-2"><label class="text-info">Identidade</label></div>
-							<div class="col-md-10"><label class="text"><%=candidato[0].identidade%></label></div>	
-						</div>				
-						<div class="row">
-							<div class="col-md-2"><label class="text-info">Endereço</label></div>
-							<div class="col-md-10"><label class="text">
-								<%=candidato[0].logradouro%>
-								<%=candidato[0].numero%> - 
-								<%=candidato[0].bairro%> - 
-								<%=candidato[0].municipio%>/
-								<%=candidato[0].estado%>
-							</label></div>
-						</div>
-						<div class="row">
-							<div class="col-md-2"><label class="text-info">Telefone 1</label></div>
-							<div class="col-md-10"><label class="text"><%=candidato[0].telefone1%></label></div>
-						</div>	
-						<% if (candidato[0].telefone2 != '') { %>
-							<div class="row">
-								<div class="col-md-2"><label class="text-info">Telefone 2</label></div>
-								<div class="col-md-10"><label class="text"><%=candidato[0].telefone2%></label></div>	
-							</div>
+				<% if(candidato.length > 0) { %>						
+					<div class="row"> 
+						<div class="col-md-2"><label class="text-info">NOME:</label></div>
+						<div class="col-md-10"><label class="text"><%=candidato[0].nome%></label></div>
+					</div>
+					<div class="row">
+						<div class="col-md-2"><label class="text-info">E-MAIL:</label></div>
+						<div class="col-md-4"><label class="text"><%=candidato[0].email%></label></div>
+						<div class="col-md-2"><label class="text-info">NASCIMENTO:</label></div>
+						<div class="col-md-4"><label class="text"><%=candidato[0].nascimento%></label></div>
+					</div>
+					<div class="row">	
+						<div class="col-md-2"><label class="text-info">CPF:</label></div>
+						<div class="col-md-4"><label class="text"><%=candidato[0].cpf%></label></div>
+						<div class="col-md-2"><label class="text-info">IDENTIDADE:</label></div>
+						<div class="col-md-4"><label class="text"><%=candidato[0].identidade%></label></div>
+					</div>
+					<div class="row">
+						<div class="col-md-2"><label class="text-info">ENDEREÇO:</label></div>
+						<div class="col-md-10"><label class="text">
+							<%=candidato[0].logradouro%>
+							<%=candidato[0].numero%> - 
+							<%=candidato[0].bairro%> - 
+							<%=candidato[0].municipio%>/
+							<%=candidato[0].estado%>
+						</label></div>
+					</div>
+					<div class="row">
+						<div class="col-md-2"><label class="text-info">TELEFONE 1:</label></div>
+						<div class="col-md-4"><label class="text"><%=candidato[0].telefone1%></label></div>
+						<% if (candidato[0].telefone2 != '') { %>								
+							<div class="col-md-2"><label class="text-info">TELEFONE 2:</label></div>
+							<div class="col-md-4"><label class="text"><%=candidato[0].telefone2%></label></div>								
 						<% } %>	
-						<div class="row">
-							<div class="col-md-2"><label class="text-info">Possui Deficiência?</label></div>
-							<div class="col-md-10"><label class="text"><%=candidato[0].deficiente%></label></div>
-						</div>
-						<% if (candidato[0].deficiente == 'SIM') { %>
-							<div class="row">
-								<div class="col-md-2"><label class="text-info">Tipo deficiência</label></div>
-								<div class="col-md-10"><label class="text"><%=candidato[0].deficiencia%></label></div>
-							</div>
+					</div>							
+					<div class="row">
+						<div class="col-md-2"><label class="text-info">POSSUI DEFICIÊNCIA?</label></div>
+						<div class="col-md-4"><label class="text"><%=candidato[0].deficiente%></label></div>
+						<% if (candidato[0].deficiente == 'Sim') { %>
+							<div class="col-md-2"><label class="text-info">TIPO DEFICIÊNCIA:</label></div>
+							<div class="col-md-4"><label class="text"><%=candidato[0].deficiencia%></label></div>
 						<% } %>
-					<% } %>
+					</div>
+				<% } %>				
+				<form id="candidato-update" class="form" action="/cadastro_update" method="post">	
+					<input type="hidden" name="cpf" id="cpf" value="<%=candidato[0].cpf%>" class="form-control">
+					<input type="submit" class="btn btn-primary btn-sm" value="Alterar dados">
+				</form>	
+			</div>			
+		</div>			
+		<!-- VALIDAÇÃO -->
+		<% if (validacao.length > 0) { %>
+			<div class="col-md-12"> <br> </div>
+			<div class="col-sm-12">
+				<div class="alert alert-danger">
+					<strong>Atenção!</strong>
+					<ul>
+						<% for(var i = 0; i < validacao.length; i++) { %>									
+							<li><%= validacao[i].msg %></li>
+						<% } %>
+					</ul>
 				</div>
 			</div>
-						
-			<% if (inscricao1 != '') { %>
-				<div class="col-md-12">
-					<h3>INSCRIÇÃO DO CANDIDATO (OPÇÃO <%=inscricao1.opcao%>)</h3>
-					<!-- área pleiteada da opção 1 -->
+		<% } %>	
+		<!-- INSCRIÇÃO - OPÇÃO 1 -->
+		<% if (inscricao1.concluida == 1) { %>
+			<div class="col-md-6">
+				<h3>INSCRIÇÃO DO CANDIDATO (OPÇÃO <%=inscricao1.opcao%>)</h3>
+				<!-- área pleiteada da opção 1 -->
+				<div class="row">
 					<div class="col-md-12">
-						<div class="row">
-							<div class="col-md-2"> <label class="text-info">Área pleiteada</label></div>
-							<div class="col-md-10"><label class="text"><%=inscricao1.descricaoarea%></label></div>
-						</div>
+						<div class="col-md-12"><label class="text-info">ÁREA PLEITEADA:</label></div>
+						<div class="col-md-12"><li><%=inscricao1.descricaoarea%></li></div>
 					</div>
-					<!-- formação acadêmica da opção 1 -->
+				</div>
+				<!-- formação acadêmica da opção 1 -->
+				<div class="row">
 					<div class="col-md-12">
+						<div class="col-md-12"><label class="text-info">FORMAÇÃO ACADÊMICA:</label></div>
+						<div class="col-md-12"><li><%=inscricao1.descricaoformacao%></li></div>
+					</div>					
+				</div>	
+				<!-- cursos da opção 1 -->
+				<% if (cursosInsc1 != '') { %>
+					<% for(var i = 0; i < cursosInsc1.length; i++) { %>
 						<div class="row">
-							<div class="col-md-2"> <label class="text-info">Formação acadêmica</label></div>
-							<div class="col-md-10"><label class="text"><%=inscricao1.descricaoformacao%></label></div>
-						</div>
-					</div>	
-					<!-- cursos da opção 1 -->
-					<% if (cursosInsc1 != '') { %>
-						<% for(var i = 0; i < cursosInsc1.length; i++) { %>
 							<div class="col-md-12">
-								<div class="row">
-									<div class="col-md-2"> <label class="text-info">Curso <%=i+1%></label></div>
-									<div class="col-md-10"><label class="text"><%=cursosInsc1[i].descricao%></label></div>
-								</div>
-							</div>		
-						<% } %>
-					<% } %>	
-					<!-- funções da opção 1 -->			
-						
-						<div class="col-md-12"> <label class="text-info">Tempo de serviço</label></div>
-						<div class="col-md-12">
-							<div class="table-responsive-md">
-								<table class="table">
-									<thead class="thead-dark">
-										<td class="text">Função</td>
-										<td class="text">Data inicial</td>
-										<td class="text">Data final</td>
-										<td class="text">Total de dias</td>
-									</thead>
-									<% for(var i = 0; i < funcoesInsc1.length; i++) { %>
-									<tbody>
-										<td><%=funcoesInsc1[i].descricao%></td>
+								<div class="col-md-12"><label class="text-info">CURSO <%=i+1%>:</label></div>
+								<div class="col-md-12"><li><%=cursosInsc1[i].descricao%></li></div>
+							</div>
+						</div>		
+					<% } %>
+				<% } %>	
+				<!-- tempo de serviço da opção 1 -->								
+				<div class="row">
+					<div class="col-md-12">
+						<div class="col-md-12"><label class="text-info">TEMPO DE SERVIÇO:</label></div>
+						<div class="col-md-12"><li>(<%=inscricao1.pontosfuncoes%> pontos) *</li></div>
+						<div class="col-md-12"><p class="obs">* Calculado pela fórmula (soma dos dias * 0.01) com limite máximo de 10 pontos</p></div>
+					</div>											
+				</div>	
+				<b></b>
+				<!-- tabela funções-->
+				<% if(funcoesInsc1.length > 0) { %>
+					<div class="col-md-12">
+						<div class="table-responsive-md">
+							<table class="table">
+								<thead>
+									<tr class="info">
+										<th class="text-info">FUNÇÃO</th>
+										<th class="text-info">DATA INICIAL</th>
+										<th class="text-info">DATA FINAL</th>
+										<th class="text-info">TOTAL DE DIAS</th>
+									</tr>
+								</thead>
+								<% for(var i = 0; i < funcoesInsc1.length; i++) { %>
+								<tbody>
+									<tr>
+										<td><li><%=funcoesInsc1[i].descricao%></li></td>
 										<td><%=funcoesInsc1[i].datainicial%></td>
 										<td><%=funcoesInsc1[i].datafinal%></td>
 										<td><%=funcoesInsc1[i].totaldias%></td>
-									</tbody>
-									<% } %>
-									<tbody>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td><%=diasFuncao1%> pontos *</td>
-									</tbody>						
-								</table>									
-							</div>
-						</div>
-					
-					<div class="col-md-12">
-						<div class="row">
-							<div class="col-md-2"> <label class="text-info">Total de pontos</label></div>
-							<div class="col-md-10"><label class="text"><%=totalPontos1%></label></div>
-						</div>						
-					</div>
-					<div class="col-md-12">
-						<div class="row">
-							<div class="col-md-2"> <label class="text-info">Data/Hora da inscrição</label></div>
-							<div class="col-md-10"><label class="text"><%=inscricao1.datainscricao%></label></div>
-						</div>						
-					</div>
-					<div class="col-md-12">
-						<div class="row">
-							<div class="col-md-2"> <label class="text-info">Protocolo</label></div>
-							<div class="col-md-10"><label class="text"><%=inscricao1.protocolo%></label></div>
-						</div>						
-					</div>
-					<div class="col-md-12">
-						<p class="obs">* Calculado pela fórmula (soma dos dias * 0.01) com limite máximo de 10 pontos</p>	
-					</div>
-					
-					<div class="col-md-12"><div class="row"><label class="text-info"></label></div></div>
-
-					<% if (inscricao2 != '') { %>	
-						<h3>INSCRIÇÃO DO CANDIDATO (OPÇÃO <%=inscricao2.opcao%>)</h3>
-						<!-- área pleiteada da opção 2 -->
-						<div class="col-md-12">
-							<div class="row">
-								<div class="col-md-2"> <label class="text-info">Área pleiteada</label></div>
-								<div class="col-md-10"><label class="text"><%=inscricao2.descricaoarea%></label></div>
-							</div>
-						</div>
-						<!-- formação acadêmica da opção 2 -->
-						<div class="col-md-12">
-							<div class="row">
-								<div class="col-md-2"> <label class="text-info">Formação acadêmica</label></div>
-								<div class="col-md-10"><label class="text"><%=inscricao2.descricaoformacao%></label></div>
-							</div>
+									</tr>
+								</tbody>
+								<% } %>
+							</table>													
 						</div>	
-						<!-- cursos da opção 2 -->
-						<% if (cursosInsc2 != '') { %>
-							<% for(var i = 0; i < cursosInsc2.length; i++) { %>
-								<div class="col-md-12">
-									<div class="row">
-										<div class="col-md-2"> <label class="text-info">Curso <%=i+1%></label></div>
-										<div class="col-md-10"><label class="text"><%=cursosInsc2[i].descricao%></label></div>
-									</div>
-								</div>		
-							<% } %>
-						<% } %>		
-						<!-- funções da opção 2 -->	
-							
-							<div class="col-md-12"> <label class="text-info">Tempo de serviço</label></div>
+					</div>
+				<% } %>									
+				<!-- pontos da opção 1 -->	
+				<div class="row">
+					<div class="col-md-12">
+						<div class="col-md-5"> <label class="text-info">PONTUAÇÃO TOTAL:</label></div>
+						<div class="col-md-7"><label class="text"><%=inscricao1.total%></label></div>
+					</div>						
+				</div>
+				<!-- data/hora e protocolo da opção 1 -->	
+				<div class="row">
+					<div class="col-md-12">
+						<div class="col-md-5"> <label class="text-info">DATA/HORA:</label></div>
+						<div class="col-md-7"><label class="text"><%=inscricao1.datainscricao%></label></div>						
+					</div>						
+				</div>
+				<!-- protocolo da opção 1 -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="col-md-5"> <label class="text-info">PROTOCOLO:</label></div>
+						<div class="col-md-7"><label class="text"><%=inscricao1.protocolo%></label></div>
+					</div>						
+				</div>	
+				<!-- TEMPO DE SERVIÇO -->
+				<% if (inscricao1.pontosfuncoes < 10) { %> 
+					<div class="col-sm-4">
+						<button type="button" id="novafuncao1" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novafuncaoinsc1">Inserir nova função</button>
+					</div>
+				<% } %>
+				<!--BOTÃO Imprimir comprovante (1ª opção)-->
+				<div class="col-sm-4">
+					<form id="comprovante-insc1" class="form" target="_blank" action="/Comprovante_candidato%>" method="post">	
+						<input type="hidden" name="codigocandidato" value="<%=candidato[0].codigocandidato%>">
+						<input type="hidden" name="codigoinscricao" value="<%=inscricao1.codigoinscricao%>">
+						<input type="submit" class="btn btn-success btn-sm" value="Imprimir comprovante">				
+					</form>	
+				</div>
+				<!--BOTÃO Excluir inscrição (1ª opção)-->
+				<!--<div class="col-sm-8">
+					<form id="excluir-insc1" class="form" action="/excluir_inscricao" method="post">
+						<input type="hidden" name="codigocandidato" value="<%=candidato[0].codigocandidato%>">	
+						<input type="hidden" name="codigoinscricao" value="<%=inscricao1.codigoinscricao%>">
+						<input type="hidden" name="opcao" value="<%=inscricao1.opcao%>">						
+						<input type="submit" class="btn btn-danger btn-sm" value="Excluir inscrição">				
+					</form>	
+				</div>-->
+				<!-- modal inserir função opção 1 -->
+				<div class="modal fade" id="novafuncaoinsc1" role="dialog">
+					<div class="modal-dialog modal-md">					
+						<div class="modal-content">
+							<form class="form-horizontal" id="candidato-func" action="/funcao" method="post">	
+								<input type="hidden" name="codigocandidato" value="<%=candidato[0].codigocandidato%>" class="form-control">	
+								<input type="hidden" name="codigoinscricao" value="<%=inscricao1.codigoinscricao%>" class="form-control">	
+								<div class="modal-header">
+									<h4>INSERIR NOVA FUNÇÃO PARA OPÇÃO 1</h4>
+								</div>
+								<div class="col-sm-12">	
+									<br/>							
+									<div class="alert alert-warning">
+										<strong >ATENÇÃO:</strong><br>
+										<li>As datas informadas devem estar dentro do período 01/01/2013 a 31/10/2018.</li>
+										<li>Insira os tempos de serviço iniciando do mais antigo para o mais atual.</li>
+										<li>É vedada a contagem cumulativa de tempo de serviço prestado concomitantemente em mais de um cargo, 
+											emprego ou função e tempo de serviço já computado para fins de aposentadoria (Item 6.3 deste Edital). 
+											EXEMPLO: Considerando os períodos de 01/01/2013 a 25/04/2013 (preenchido no 1º vínculo) e de 10/04/2013 a 22/12/2013, 
+											a Data Inicial informada no preenchimento do 2º vínculo deve ser 26/04/2013 e a Data Final 22/12/2013, descartando o período concomitante.</li>	
+									</div>									
+								</div>
+								<div class="col-sm-12">
+									<div class="modal-body">
+										<div class="form-group">
+											<label for="newdescricao" control-label>Descrição da função</label>
+											<div>
+												<input type="text" class="form-control" id="newdescricao" name="newdescricao" minlength="5" maxlength="100" placeholder="Informe a nova função...">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="newdatainicial" control-label>Data inicial</label>
+											<div>
+												<input type="date" class="form-control" id="newdatainicial" name="newdatainicial">  
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="newdatafinal" control-label>Data final</label>
+											<div >
+												<input type="date" class="form-control" id="newdatafinal" name="newdatafinal">
+											</div>
+										</div>								
+									</div>							 
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+									<button type="submit" class="btn btn-success">Salvar</button>
+								</div>
+							</form>
+						</div>		
+					</div>				
+				</div>
+			</div>			
+		<% } else { %>	
+			<!--BOTÃO Realizar inscrição (1ª opção)-->
+			<div class="col-md-6">
+				<h3>INSCRIÇÃO DO CANDIDATO (OPÇÃO <%=inscricao1.opcao%>)</h3>
+				<form id="candidato-insc1" class="form" action="/inscricao_candidato" method="post">	
+					<input type="hidden" name="codigocandidato" value="<%=candidato[0].codigocandidato%>" class="form-control">
+					<input type="hidden" name="codigoinscricao" value="<%=inscricao1.codigoinscricao%>" class="form-control">
+					<input type="hidden" name="opcao" value="<%=inscricao1.opcao%>" class="form-control">
+					<div class="col-md-12">
+						<br/>
+						<input type="submit" class="btn btn-primary btn-md" value="Realizar inscrição (1ª opção)">
+					</div>
+				</form>
+			</div>	
+		<% } %>												
+		<!-- INSCRIÇÃO - OPÇÃO 2 -->
+		<% if (inscricao1.concluida == 1) { %>
+			<% if (inscricao2.concluida == 1) { %>
+				<!-- DADOS opção 2 -->
+				<div class="col-md-6">
+					<h3>INSCRIÇÃO DO CANDIDATO (OPÇÃO <%=inscricao2.opcao%>)</h3>
+					<!-- área pleiteada da opção 2 -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-12"><label class="text-info">ÁREA PLEITEADA:</label></div>
+							<div class="col-md-12"><li><%=inscricao2.descricaoarea%></li></div>
+						</div>
+					</div>
+					<!-- formação acadêmica da opção 2 -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-12"><label class="text-info">FORMAÇÃO ACADÊMICA:</label></div>
+							<div class="col-md-12"><li><%=inscricao2.descricaoformacao%></li></div>
+						</div>
+					</div>	
+					<!-- cursos da opção 2 -->
+					<% if (cursosInsc2 != '') { %>
+						<% for(var i = 0; i < cursosInsc2.length; i++) { %>
 							<div class="col-md-12">
-								<div class="table-responsive-md">
-									<table class="table">
-										<thead class="thead-dark">
-											<td class="text">Função</td>
-											<td class="text">Data inicial</td>
-											<td class="text">Data final</td>
-											<td class="text">Total de dias</td>
-										</thead>
-										<% for(var i = 0; i < funcoesInsc2.length; i++) { %>
-										<tbody>
-											<td><%=funcoesInsc2[i].descricao%></td>
+								<div class="row">
+									<div class="col-md-12"><label class="text-info">CURSO <%=i+1%>:</label></div>
+									<div class="col-md-12"><li><%=cursosInsc2[i].descricao%></li></div>
+								</div>
+							</div>		
+						<% } %>
+					<% } %>		
+					<!-- tempo de serviço da opção 2 -->	
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-12"><label class="text-info">TEMPO DE SERVIÇO:</label></div>
+							<div class="col-md-12"><li>(<%=inscricao2.pontosfuncoes%> pontos) *</li></div>
+							<div class="col-md-12"><p class="obs">* Calculado pela fórmula (soma dos dias * 0.01) com limite máximo de 10 pontos</p></div>
+						</div>											
+					</div>
+					<!-- tabela funções-->
+					<% if(funcoesInsc2.length > 0) { %>
+						<div class="col-md-12">
+							<div class="table-responsive-md">
+								<table class="table">
+									<thead>
+										<tr class="info">
+											<th class="text-info">FUNÇÃO</th>
+											<th class="text-info">DATA INICIAL</th>
+											<th class="text-info">DATA FINAL</th>
+											<th class="text-info">TOTAL DE DIAS</th>
+										</tr>
+									</thead>
+									<% for(var i = 0; i < funcoesInsc2.length; i++) { %>
+									<tbody>
+										<tr>
+											<td><li><%=funcoesInsc2[i].descricao%></li></td>
 											<td><%=funcoesInsc2[i].datainicial%></td>
 											<td><%=funcoesInsc2[i].datafinal%></td>
 											<td><%=funcoesInsc2[i].totaldias%></td>
-										</tbody>
-										<% } %>
-										<tbody>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td><%=diasFuncao2%> pontos *</td>
-										</tbody>
-									</table>	
-								</div>
-							</div>
-					
-						<div class="col-md-12">
-							<div class="row">
-								<div class="col-md-2"> <label class="text-info">Total de pontos</label></div>
-								<div class="col-md-10"><label class="text"><%=totalPontos2%></label></div>
-							</div>						
+										</tr>
+									</tbody>
+									<% } %>
+								</table>													
+							</div>	
 						</div>
-						<div class="col-md-12">
-							<div class="row">
-								<div class="col-md-2"> <label class="text-info">Data/Hora da inscrição</label></div>
-								<div class="col-md-10"><label class="text"><%=inscricao2.datainscricao%></label></div>
-							</div>						
+					<% } %>					
+					<!-- pontos da opção 2 -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-5"> <label class="text-info">PONTUAÇÃO TOTAL:</label></div>
+							<div class="col-md-7"><label class="text"><%=inscricao2.total%></label></div>
+						</div>						
+					</div>
+					<!-- data/hora e protocolo da opção 2 -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-5"> <label class="text-info">DATA/HORA:</label></div>
+							<div class="col-md-7"><label class="text"><%=inscricao2.datainscricao%></label></div>
+						</div>						
+					</div>
+					<!-- protocolo da opção 2 -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-5"> <label class="text-info">PROTOCOLO:</label></div>
+							<div class="col-md-7"><label class="text"><%=inscricao2.protocolo%></label></div>
+						</div>						
+					</div>
+					<!-- TEMPO DE SERVIÇO -->
+					<% if (inscricao2.pontosfuncoes < 10) { %>
+						<div class="col-sm-4">
+							<button type="button" id="novafuncao2" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novafuncaoinsc2">Inserir nova função</button>
 						</div>
-						<div class="col-md-12">
-							<div class="row">
-								<div class="col-md-2"> <label class="text-info">Protocolo</label></div>
-								<div class="col-md-10"><label class="text"><%=inscricao2.protocolo%></label></div>
-							</div>						
-						</div>
-						<div class="col-md-12">
-							<p class="obs">* Calculado pela fórmula (soma dos dias * 0.01) com limite máximo de 10 pontos</p>	
-						</div>
+					<% } %>
+					<!--BOTÃO Imprimir comprovante (2ª opção)-->
+					<div class="col-sm-4">
+						<form id="comprovante-insc2" class="form" target="_blank" action="/Comprovante_candidato" method="post">	
+							<input type="hidden" name="cpf" value="<%=candidato[0].cpf%>">
+							<input type="hidden" name="codigocandidato" value="<%=candidato[0].codigocandidato%>">
+							<input type="hidden" name="codigoinscricao" value="<%=inscricao2.codigoinscricao%>">
+							<input type="hidden" name="descricaoarea" value="<%=inscricao2.descricaoarea%>">
+							<input type="hidden" name="formacao" value="<%=inscricao2.descricaoformacao%>">
 
-						<div class="col-md-12"><div class="row"><label class="text-info"></label></div></div>
-					<% } else { %>
-						<!--BOTÃO Realizar inscrição (2ª opção)-->
+							<input type="hidden" name="diasFuncao" value="<%=inscricao2.pontosfuncoes%>">
+							<input type="hidden" name="totalPontos" value="<%=inscricao2.total%>">
+							<input type="hidden" name="datainscricao" value="<%=inscricao2.datainscricao%>">
+							<input type="hidden" name="protocolo" value="<%=inscricao2.protocolo%>">
+							<input type="submit" class="btn btn-success btn-sm" value="Imprimir comprovante">										
+						</form>	
+					</div>
+					<!--BOTÃO Excluir inscrição (2ª opção)-->
+					<!--<div class="col-sm-8">
+						<form id="excluir-insc2" class="form" action="/excluir_inscricao" method="post">
+							<input type="hidden" name="codigocandidato" value="<%=candidato[0].codigocandidato%>">	
+							<input type="hidden" name="codigoinscricao" value="<%=inscricao2.codigoinscricao%>">
+							<input type="hidden" name="opcao" value="<%=inscricao2.opcao%>">						
+							<input type="submit" class="btn btn-danger btn-sm" value="Excluir inscrição">				
+						</form>	
+					</div>-->
+					<!-- modal inserir função opção 1 -->
+					<div class="modal fade" id="novafuncaoinsc2" role="dialog">
+						<div class="modal-dialog modal-md">					
+							<div class="modal-content">
+								<form class="form-horizontal" id="candidato-func" action="/funcao" method="post">	
+									<input type="hidden" name="codigocandidato" value="<%=candidato[0].codigocandidato%>" class="form-control">	
+									<input type="hidden" name="codigoinscricao" value="<%=inscricao2.codigoinscricao%>" class="form-control">	
+									<div class="modal-header">
+										<h4>INSERIR NOVA FUNÇÃO PARA OPÇÃO 2</h4>
+									</div>
+									<div class="col-sm-12">	
+										<br/>							
+										<div class="alert alert-warning">
+											<strong >ATENÇÃO:</strong><br>
+											<li>As datas informadas devem estar dentro do período 01/01/2013 a 31/10/2018.</li>
+											<li>Insira os tempos de serviço iniciando do mais antigo para o mais atual.</li>
+											<li>É vedada a contagem cumulativa de tempo de serviço prestado concomitantemente em mais de um cargo, 
+												emprego ou função e tempo de serviço já computado para fins de aposentadoria (Item 6.3 deste Edital). 
+												EXEMPLO: Considerando os períodos de 01/01/2013 a 25/04/2013 (preenchido no 1º vínculo) e de 10/04/2013 a 22/12/2013, 
+												a Data Inicial informada no preenchimento do 2º vínculo deve ser 26/04/2013 e a Data Final 22/12/2013, descartando o período concomitante.</li>	
+										</div>									
+									</div>
+									<div class="col-sm-12">
+										<div class="modal-body">
+											<div class="form-group">
+												<label for="newdescricao" control-label>Descrição da função</label>
+												<div>
+													<input type="text" class="form-control" id="newdescricao" name="newdescricao" minlength="5" maxlength="100" placeholder="Informe a nova função...">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="newdatainicial" control-label>Data inicial</label>
+												<div>
+													<input type="date" class="form-control" id="newdatainicial" name="newdatainicial">  
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="newdatafinal" control-label>Data final</label>
+												<div >
+													<input type="date" class="form-control" id="newdatafinal" name="newdatafinal">
+												</div>
+											</div>								
+										</div>							 
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+										<button type="submit" class="btn btn-success">Salvar</button>
+									</div>
+								</form>
+							</div>		
+						</div>				
+					</div>
+				</div>								
+			<% } else { %>
+				<!--BOTÃO Realizar inscrição (2ª opção)-->
+				<div class="col-md-6">
+					<h3>INSCRIÇÃO DO CANDIDATO (OPÇÃO <%=inscricao2.opcao%>)</h3>
+					<form id="candidato-insc2" class="form" action="/inscricao_candidato" method="post">	
+						<input type="hidden" name="codigocandidato" value="<%=candidato[0].codigocandidato%>" class="form-control">
+						<input type="hidden" name="codigoinscricao" value="<%=inscricao2.codigoinscricao%>" class="form-control">
+						<input type="hidden" name="opcao" value="<%=inscricao2.opcao%>" class="form-control">
 						<div class="col-md-12">
 							<br/>
-							<input type="submit" class="btn btn-info btn-md" value="Realizar inscrição (2ª opção)">
-							<input type="hidden" name="opcao" id="opcao" value="2" class="form-control">
-						</div>						
-					<% } %>	
-				</div>						
-			<% } else { %>	
-				<!--BOTÃO Realizar inscrição (1ª opção)-->
-				<div class="col-md-12">
-					<br/>
-					<input type="submit" class="btn btn-info btn-md" value="Realizar inscrição (1ª opção)">
-					<input type="hidden" name="opcao" id="opcao" value="1" class="form-control">
-				</div>
-			<% } %>				
-		</form>	
+							<input type="submit" class="btn btn-primary btn-md" value="Realizar inscrição (2ª opção)" align>
+						</div>	
+					</form>	
+				</div>	
+			<% } %>	
+		<% } %>	
+		<div class="col-md-12"> <br> </div>
 	</body>
 </html>

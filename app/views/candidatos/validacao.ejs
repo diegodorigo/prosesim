@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Validação | Processo Seletivo</title>	
+		<link rel="shortcut icon" href="/images/School.ico" type="image/x-icon">	
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+		<link href="css/style.css" rel="stylesheet">		
+		<script src="js/jquery-2.2.1.js"></script>		
+	</head>
+	<body>
+		<div class="topopagina" align="center">
+			<img src="images/logo.jpg" class="mx-auto d-block">
+		</div>
+		<h3 class="text-center text-white pt-4"><b>SECRETARIA MUNICIPAL DE EDUCAÇÃO</b></h3>
+		<h5 class="text-center text-white pt-3"><b>PROCESSO SELETIVO SIMPLIFICADO - EDITAL Nº 006/2018</b></h5>
+    	<!-- DADOS PESSOAIS -->
+		<div class="col-sm-12">
+			<h4>DADOS PESSOAIS</h4>
+			<div class="col-sm-12">
+				<% if(candidato.length > 0) { %>						
+					<div class="row"> 
+						<div class="col-sm-2"><label class="text-info">NOME:</label></div>
+						<div class="col-sm-10"><label class="text"><%=candidato[0].nome%></label></div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2"><label class="text-info">E-MAIL:</label></div>
+						<div class="col-sm-4"><label class="text"><%=candidato[0].email%></label></div>
+						<div class="col-sm-2"><label class="text-info">NASCIMENTO:</label></div>
+						<div class="col-sm-4"><label class="text"><%=candidato[0].nascimento%></label></div>
+					</div>
+					<div class="row">	
+						<div class="col-sm-2"><label class="text-info">CPF:</label></div>
+						<div class="col-sm-4"><label class="text"><%=candidato[0].cpf%></label></div>
+						<div class="col-sm-2"><label class="text-info">IDENTIDADE:</label></div>
+						<div class="col-sm-4"><label class="text"><%=candidato[0].identidade%></label></div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2"><label class="text-info">ENDEREÇO:</label></div>
+						<div class="col-sm-10"><label class="text">
+							<%=candidato[0].logradouro%>
+							<%=candidato[0].numero%> - 
+							<%=candidato[0].bairro%> - 
+							<%=candidato[0].municipio%>/
+							<%=candidato[0].estado%>
+						</label></div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2"><label class="text-info">TELEFONE 1:</label></div>
+						<div class="col-sm-4"><label class="text"><%=candidato[0].telefone1%></label></div>
+						<% if (candidato[0].telefone2 != '') { %>								
+							<div class="col-sm-2"><label class="text-info">TELEFONE 2:</label></div>
+							<div class="col-sm-4"><label class="text"><%=candidato[0].telefone2%></label></div>								
+						<% } %>	
+					</div>							
+					<div class="row">
+						<div class="col-sm-2"><label class="text-info">POSSUI DEFICIÊNCIA?</label></div>
+						<div class="col-sm-4"><label class="text"><%=candidato[0].deficiente%></label></div>
+						<% if (candidato[0].deficiente == 'Sim') { %>
+							<div class="col-sm-2"><label class="text-info">TIPO DEFICIÊNCIA:</label></div>
+							<div class="col-sm-4"><label class="text"><%=candidato[0].deficiencia%></label></div>
+						<% } %>
+					</div>
+				<% } %>
+			</div>
+		</div>
+		<!-- INSCRIÇÃO - OPÇÃO 1 -->
+		<% if (inscricao1.codigoarea != 0) { %>
+			<div class="col-sm-12">
+				<h4>INSCRIÇÃO DO CANDIDATO (OPÇÃO <%=inscricao1.opcao%>)</h4>
+				<!-- área pleiteada da opção 1 -->
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="col-sm-12"><label class="text-info">ÁREA PLEITEADA:</label></div>
+						<div class="col-sm-12"><li><%=inscricao1.descricaoarea%></li></div>
+					</div>
+				</div>
+				<!-- formação acadêmica da opção 1 -->
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="col-sm-12"><label class="text-info">FORMAÇÃO ACADÊMICA:</label></div>
+						<div class="col-sm-12"><li><%=inscricao1.descricaoformacao%></li></div>
+					</div>					
+				</div>	
+				<!-- cursos da opção 1 -->
+				<% if (cursosInsc1 != '') { %>
+					<% for(var i = 0; i < cursosInsc1.length; i++) { %>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="col-sm-12"><label class="text-info">CURSO <%=i+1%>:</label></div>
+								<div class="col-sm-12"><li><%=cursosInsc1[i].descricao%></li></div>
+							</div>
+						</div>		
+					<% } %>
+				<% } %>	
+				<!-- tempo de serviço da opção 1 -->								
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="col-sm-12"><label class="text-info">TEMPO DE SERVIÇO:</label></div>
+						<div class="col-sm-12"><li>(<%=inscricao1.pontosfuncoes%> pontos) *</li></div>
+						<div class="col-sm-12"><p class="obs">* Calculado pela fórmula (soma dos dias * 0.01) com limite máximo de 10 pontos</p></div>
+					</div>											
+				</div>	
+				<b></b>
+				<!-- tabela funções-->
+				<% if(funcoesInsc1.length > 0) { %> 
+					<div class="col-sm-12">
+						<div class="table-responsive-sm">
+							<table class="table">
+								<thead>
+									<tr class="info">
+										<th class="text-info">FUNÇÃO</th>
+										<th class="text-info">DATA INICIAL</th>
+										<th class="text-info">DATA FINAL</th>
+										<th class="text-info">TOTAL DE DIAS</th>
+									</tr>
+								</thead>
+								<% for(var i = 0; i < funcoesInsc1.length; i++) { %>
+								<tbody>
+									<tr>
+										<td><li><%=funcoesInsc1[i].descricao%></li></td>
+										<td><%=funcoesInsc1[i].datainicial%></td>
+										<td><%=funcoesInsc1[i].datafinal%></td>
+										<td><%=funcoesInsc1[i].totaldias%></td>
+									</tr>
+								</tbody>
+								<% } %>
+							</table>													
+						</div>	
+					</div>	
+				<% } %>								
+				<!-- pontos da opção 1 -->	
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="col-sm-5"> <label class="text-info">PONTUAÇÃO TOTAL:</label></div>
+						<div class="col-sm-7"><label class="text"><%=inscricao1.total%></label></div>
+					</div>						
+				</div>
+				<!-- data/hora e protocolo da opção 1 -->	
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="col-sm-5"> <label class="text-info">DATA/HORA:</label></div>
+						<div class="col-sm-7"><label class="text"><%=inscricao1.datainscricao%></label></div>						
+					</div>						
+				</div>
+				<!-- protocolo da opção 1 -->
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="col-sm-5"> <label class="text-info">PROTOCOLO:</label></div>
+						<div class="col-sm-7"><label class="text"><%=inscricao1.protocolo%></label></div>
+					</div>						
+				</div>	
+			</div>
+		<% } else { %>
+			<div class="col-sm-12">
+				<h4>INSCRIÇÃO DO CANDIDATO (OPÇÃO 1)</h4>
+				<h5><li>NÃO REALIZADA</li></h5>
+			</div>
+		<% } %>
+		<!-- INSCRIÇÃO - OPÇÃO 2 -->		
+		<% if (inscricao2.codigoarea != 0) { %>
+			<!-- DADOS opção 2 -->
+			<div class="col-sm-12">
+				<h4>INSCRIÇÃO DO CANDIDATO (OPÇÃO <%=inscricao2.opcao%>)</h4>
+				<!-- área pleiteada da opção 2 -->
+				<div class="col-sm-12">
+					<div class="row">
+						<div class="col-sm-12"><label class="text-info">ÁREA PLEITEADA:</label></div>
+						<div class="col-sm-12"><li><%=inscricao2.descricaoarea%></li></div>
+					</div>
+				</div>
+				<!-- formação acadêmica da opção 2 -->
+				<div class="col-sm-12">
+					<div class="row">
+						<div class="col-sm-12"><label class="text-info">FORMAÇÃO ACADÊMICA:</label></div>
+						<div class="col-sm-12"><li><%=inscricao2.descricaoformacao%></li></div>
+					</div>
+				</div>	
+				<!-- cursos da opção 2 -->
+				<% if (cursosInsc2 != '') { %>
+					<% for(var i = 0; i < cursosInsc2.length; i++) { %>
+						<div class="col-sm-12">
+							<div class="row">
+								<div class="col-sm-12"><label class="text-info">CURSO <%=i+1%>:</label></div>
+								<div class="col-sm-12"><li><%=cursosInsc2[i].descricao%></li></div>
+							</div>
+						</div>		
+					<% } %>
+				<% } %>		
+				<!-- tempo de serviço da opção 2 -->	
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="col-sm-12"><label class="text-info">TEMPO DE SERVIÇO:</label></div>
+						<div class="col-sm-12"><li>(<%=inscricao2.pontosfuncoes%> pontos) *</li></div>
+						<div class="col-sm-12"><p class="obs">* Calculado pela fórmula (soma dos dias * 0.01) com limite máximo de 10 pontos</p></div>
+					</div>											
+				</div>
+				<!-- tabela funções-->
+				<% if(funcoesInsc2.length > 0) { %>
+					<div class="col-sm-12">
+						<div class="table-responsive-md">
+							<table class="table">
+								<thead>
+									<tr class="info">
+										<th class="text-info">FUNÇÃO</th>
+										<th class="text-info">DATA INICIAL</th>
+										<th class="text-info">DATA FINAL</th>
+										<th class="text-info">TOTAL DE DIAS</th>
+									</tr>
+								</thead>
+								<% for(var i = 0; i < funcoesInsc2.length; i++) { %>
+								<tbody>
+									<tr>
+										<td><li><%=funcoesInsc2[i].descricao%></li></td>
+										<td><%=funcoesInsc2[i].datainicial%></td>
+										<td><%=funcoesInsc2[i].datafinal%></td>
+										<td><%=funcoesInsc2[i].totaldias%></td>
+									</tr>
+								</tbody>
+								<% } %>
+							</table>													
+						</div>	
+					</div>	
+				<% } %>				
+				<!-- pontos da opção 2 -->
+				<div class="col-sm-12">
+					<div class="row">
+						<div class="col-sm-5"> <label class="text-info">PONTUAÇÃO TOTAL:</label></div>
+						<div class="col-sm-7"><label class="text"><%=inscricao2.total%></label></div>
+					</div>						
+				</div>
+				<!-- data/hora e protocolo da opção 2 -->
+				<div class="col-sm-12">
+					<div class="row">
+						<div class="col-sm-5"> <label class="text-info">DATA/HORA:</label></div>
+						<div class="col-sm-7"><label class="text"><%=inscricao2.datainscricao%></label></div>
+					</div>						
+				</div>
+				<!-- protocolo da opção 2 -->
+				<div class="col-sm-12">
+					<div class="row">
+						<div class="col-sm-5"> <label class="text-info">PROTOCOLO:</label></div>
+						<div class="col-sm-7"><label class="text"><%=inscricao2.protocolo%></label></div>
+					</div>						
+				</div>
+			</div>	
+		<% } else { %>
+			<div class="col-sm-12">
+				<h4>INSCRIÇÃO DO CANDIDATO (OPÇÃO 2)</h4>
+				<h5><li>NÃO REALIZADA</li></h5>
+			</div>
+		<% } %>								
+	</body>
+</html>

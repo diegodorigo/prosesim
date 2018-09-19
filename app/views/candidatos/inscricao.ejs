@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>PROSESIM | Cadastro</title>
+		<title>Inscrição | Processo Seletivo</title>
+		<link rel="shortcut icon" href="/images/School.ico" type="image/x-icon">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
@@ -9,7 +10,8 @@
 		<script src="js/jquery-2.2.1.js"></script>
 		<script src="js/input_mask.js"></script>
 	</head>
-	<body class="body">			
+	<body class="body">	
+			<body onLoad="history.go(+1)">	
 		<div class="menu">
 			<div class="container-fluid">
 				<div>
@@ -42,35 +44,37 @@
 		</div>
 
 		<div class="container">
-			<form class="form" action="/inscricao" method="post">
-				<input type="hidden" name="codigocandidato" id="codigocandidato" value="<%=candidato.codigocandidato%>" class="form-control">
-				<input type="hidden" name="cpf" id="cpf" value="<%=candidato.cpf%>" class="form-control">
-				<input type="hidden" name="opcao" id="opcao" value="<%=candidato.opcao%>" class="form-control">
+			<form class="form" action="/salvar_inscricao" method="post">
+				<input type="hidden" name="codigocandidato" value="<%=dadosForm.codigocandidato%>" class="form-control">
+				<input type="hidden" name="codigoinscricao" value="<%=dadosForm.codigoinscricao%>" class="form-control">
+				<input type="hidden" name="opcao" value="<%=dadosForm.opcao%>" class="form-control">
 				<!-- ÁREA PLEITEADA -->
 				<script>
-					function myFunction() {
-						var x = document.getElementById("codigoarea").value;
-						document.getElementById("demo").innerHTML = x;										
+					function ExibirRequisitos() {
+						var y = document.getElementById("instrucao")[document.getElementById("codigoarea").value].text;
+						document.getElementById("demo").innerHTML = y;										
 					}
-				</script>							
-
+				</script>	
 				<div class="col-sm-12">
 					<h4 class="text-left text-info">Área Pleiteada</h4>	
 					<% if(areas.length > 0) { %>
 						<div class="form-group">								
 							<label class="col-sm-12" for="codigoarea">
-								<select class="form-control" name="codigoarea" id="codigoarea" onchange="myFunction()">
-									<option value="0">Selecione uma opção...</option>
+								<select class="form-control" name="codigoarea" id="codigoarea" onchange="ExibirRequisitos()">
 									<% for (var i = 0; i < areas.length; i++) { %>	
-										<option value="<%=areas[i].codigoarea%>"><%=areas[i].descricao%></option>										
+										<option value="<%=areas[i].codigoarea%>"><%=areas[i].descricao%></option>																			
+									<% } %>		
+								</select>
+								<select id="instrucao" style="display: none;">
+									<% for (var i = 0; i < areas.length; i++) { %>	
+										<option value="<%=areas[i].codigoarea%>"><%=areas[i].instrucao%></option>																			
 									<% } %>		
 								</select>
 							</label>							
 							 <div class="col-sm-12">								
 								<div class="alert alert-warning">
-									<strong >Pré-requisitos:</strong><br>
-									<p id="demo"></p> 
-									
+									<strong id="pr">Pré-requisitos:</strong><br>
+									<p id="demo"></p> 									
 								</div>									
 							</div>
 							<div class="col-sm-12">
@@ -78,8 +82,7 @@
 							</div>
 						</div>
 					<% } %>					
-				</div>	
-				
+				</div>					
 				<!-- FORMAÇÃO ACADEMICA -->				
 				<div class="col-sm-12">
 					<h4 class="text-left text-info">Formação acadêmica</h4>
@@ -125,56 +128,12 @@
 						</div>
 					<% } %>
 				</div>
-				<!-- TEMPO DE SERVIÇO -->
-				<div class="col-md-12">
-					<h4 class="text-left text-info">Tempo de serviço</h4>
-					<li><a href="#novafuncao" data-toggle="modal">Nova função</a></li>
-				</div>				
 				<!-- SALVAR -->
 				<div class="col-sm-6">
 					<br/>
-					<input type="submit" class="btn btn-info btn-md" value="Salvar">
+					<input type="submit" class="btn btn-primary btn-md" value="Salvar">
 				</div>
-			</form>	
-
-			<!-- MODAL -->
-			<div class="modal fade" id="novafuncao" role="dialog">
-				<div class="modal-dialog modal-md">					
-					<div class="modal-content">
-						<form class="form-horizontal">
-							<div class="modal-header">
-								<h4>Inserir nova função</h4>
-							</div>
-							<div class="col-sm-12">
-								<div class="modal-body">								
-									<div class="form-group">
-										<label for="descricao" control-label>Descrição: </label>
-										<div>
-											<input type="text" class="form-control" id="descricao" name="descricao" placeholder="Informe a nova função...">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="datainicial" control-label>Data inicial: </label>
-										<div>
-											<input type="date" class="form-control" id="datainicial" name="datainicial">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="datafinal" control-label>Data final: </label>
-										<div >
-											<input type="date" class="form-control" id="datafinal" name="datafinal">
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-								<button type="button" class="btn btn-primary">Salvar</button>
-							</div>
-						</form>
-					</div>		
-				</div>				
-			</div>						
+			</form>		
 		</div>
 	</body>
 </html>
